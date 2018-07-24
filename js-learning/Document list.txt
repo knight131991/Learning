@@ -1,0 +1,9 @@
+jQuery : js的lib,類似HTML
+Sass : CSS的延伸語言。
+W3s : HTML,CSS,Js...語言的教學網站。
+yarn
+bower
+npm : node package manager
+caniuse : 查詢瀏覽器對開發原件相容性的網站。
+js bin : 提供線上編輯、偵錯各式前端語言的網站。
+atom : 跨平台編輯器，與SV code類似。
