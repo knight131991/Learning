@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<h1> Hello world!</h1>
+<p title="I'm a tooltip"> The first paragraph </p>
+<p>This is<br>a paragraph<br>with line breaks.</p>
+<pre>This paragraph is the 
+content of         preformatted  text.</pre>
+<a href = "https://www.youtube.com/watch?v=Xi1wJ-PRmP8"> This is a link </a>
+<br>
+<a href = "https://www.youtube.com/watch?v=Xi1wJ-PRmP8" target="_blank"> This is a link also</a>
+<br>
+<a href = "#imgtext"> Jump to Image </a>
+<br>
+<a href = "default.asp">
+<img src = "programming.gif" alt="HTML tutorial">
+</a>
+<br>
+<p style="color:cyan" id ="imgtext"> Image </p>
+<img src = "w3schools.jpg" alt = "W3Schools.com" title="image(tooltip)" width = "100" height =¡@"150">
+<p><img src = "smiley.gif" alt = "Smiley face" style = "float:right;width:42px;height:42px"> The image will float to the right of the text.A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.</p>
+<p> Image map </p>
+<img src = "workplace.jpg" alt="workplace" usemap = "workmap" width="400" height="380">
+<map name = "workmap">
+	<area shape = "rect" coords="34,44,270,350" alt = computer href="computer.htm">
+    <area shape = "rect" coords="290,172,333,250" alt="phone" href="phone.htm">
+    <area shape = "circle" coords = "337,300,44" alt="cup of coffee" href = "coffee.htm">
+</map>
+<hr>
+<p> Button</p>
+<button> Click me </button>
+<button> Don't you want to click me?</button>
+<hr>
+<p> Unordered/bullet list </p>
+<ul>
+	<li> strawberry </li>
+    <li> blueberry </li>
+    <li> cranberry </li>
+</ul>
+<p> Ordered list </p>
+<ol>
+	<li> coffee</li>
+    <li>Tea</li>
+    <li>Me</li>
+    
+</ol>
+<hr>
+<table style="border:1px solid black">
+	<caption>Table</caption>
+	<tr  style="border:1px solid black">
+    	<th> Name</th>
+        <th> Telephone</th>
+    </tr>
+    <tr>
+    	<td>Jack</td>
+        <td>0912345678</td>
+    </tr>
+        <tr>
+    	<td>Matt</td>
+        <td>0912345678</td>
+    </tr>
+</table>
+<hr>
+<p>IFrame</p>
+<p><a href="https://www.w3schools.com" target="myiframe">W3Schools.com</a></p>
+<iframe src="https://www.facebook.com" name="myiframe" width="800px" height="800px"></iframe>
+<hr>
+<p>Show Different Images Depending on Browser Width</p>
+<picture>
+	<source srcset="img_smallflower.jpg" media="(max-width:500px)">
+	<source srcset="img_flowers.jpg" media="(max-width:1200px)">
+  	<source srcset="flowers.jpg">
+  	<img src="img_smallflower.jpg" alt="Flowers">
+</picture>
+
+
+</body>
+
+</html>
