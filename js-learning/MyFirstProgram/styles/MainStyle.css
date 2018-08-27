@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+}
+
+h1{
+    background: rgba(165, 185, 201, 0.897);
+    text-align: center;
+    vertical-align: middle;
+    font-size: 35px;
+    height:100px;
+    line-height: 100px;
+}
+
+#frame{
+    display: -webkit-flex;
+    display: flex;
+    height:700px;
+}
+
+nav{
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: rgb(62, 72, 73);
+    color:white;
+}
+
+#content{
+    -webkit-flex: 5;
+    -ms-flex: 5;
+    flex: 5;
+    border:1px solid gray;
+}
+
+.mybutton{
+    background: red;
+}
+
+@media(max-width:800px){
+    #frame{
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+}
