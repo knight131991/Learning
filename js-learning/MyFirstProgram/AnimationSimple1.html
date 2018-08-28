@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8">
+<meta name= "viewport" content="width = device-widht">
+<script src= "https://code.jquery.com/jquery-1.10.2.js"></script>
+<title> Animation Simple 1</title>
+
+<style>
+*{
+    box-sizing: border-box;
+}
+#container{
+    background: red;
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+#animate{
+    background: yellow;
+    position: absolute;
+    width: 50%;
+    height: inherit;
+}
+button{
+    width: 200px;
+    height: 50px;
+}
+#buttonGroup{
+    margin-left: auto;
+    margin-right: auto;
+    width: 405px;
+}
+</style>
+</head>
+
+<body>
+<div id= "container">
+    <div id= "animate"></div>
+</div>
+<br>
+<div id= "buttonGroup">
+    <button id="startButton"> START </button>
+    <button id="stopButton"> STOP </button>
+    <button id="accelerateButton"> ACCELERATE </button>
+    <button id="slowDownButton"> SLOW DOWN </button>
+</div>
+
+<script>
+    const $containerEle = jQuery('#container');
+    const $animateEle = jQuery('#animate');
+    const left_bound = 0;
+    
+    let left = 0;
+    let isBound = false;
+    let isStart = true;
+    let speed = 1;
+    let requestID;
+
+    const move = ()=>{
+        const right_bound = $containerEle.width() - $animateEle.width();
+        if(left <= left_bound || left >= right_bound){
+            isBound = !isBound;
+        }
+        (isBound)? left+=speed : left-=speed;
+        $animateEle.css('left', left + 'px');
+        requestID = window.requestAnimationFrame(move);
+    }
+    requestID = window.requestAnimationFrame(move);
+
+    const setAccAndSlowDisabled = (vale) =>{
+        document.getElementById('accelerateButton').disabled = vale;
+        document.getElementById('slowDownButton').disabled = vale;
+    }
+    const start = ()=>{
+        if(isStart)return;
+        isStart = true;
+        setAccAndSlowDisabled(false);
+         window.requestAnimationFrame(move);
+    }
+    const stop = ()=>{
+        isStart = false;
+        setAccAndSlowDisabled(true);
+        window.cancelAnimationFrame(requestID);
+    }
+    const accelerate = ()=>{
+        if(speed > 50) return;
+        speed ++;
+    }
+    const slowDown = ()=>{
+        if(speed <= 1) return;
+        speed --;
+    }
+
+
+    document.getElementById('startButton').addEventListener("click", start);
+    document.getElementById('stopButton').addEventListener("click", stop);
+    document.getElementById('accelerateButton').addEventListener("click", accelerate);
+    document.getElementById('slowDownButton').addEventListener("click", slowDown);
+</script>
+</body>
+</html>
