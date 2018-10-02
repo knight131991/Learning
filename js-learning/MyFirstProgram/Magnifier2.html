@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8">
+<meta name= "viewport" content="width = device-width">
+<script src= "https://code.jquery.com/jquery-1.10.2.js"></script>
+<title>Magnifier 2</title>
+
+<style>
+*{
+    box-sizing: border-box;
+}
+
+#simg_container{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 50vw;
+    height: 482px;
+    background-image: url("./images/bumblebee_s.jpg");
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+
+#simg_container2{
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    width: 50vw;
+    height: 482px;
+    background-image: url("./images/bumblebee_s2.jpg");
+    background-repeat: no-repeat;
+    background-position: 0px 41px;
+}
+
+#myCanvas{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    visibility: hidden;
+    border: 3px solid black;
+    border-radius: 50%;
+}
+
+</style>
+</head>
+
+<body>
+
+    <div id= "simg_container"><p id = "pp">mouse position on img</p></div>
+    <div id= "simg_container2"></div>
+    <canvas id= "myCanvas" width= "500" height="500"></canvas>
+    <!--<img id ="imgg" src = './images/bumblebee_l.jpg' style="width: 1000px; height: 500px; border: 1px solid red"></img>-->
+<script>
+
+class cpoint{
+    constructor(x,y){
+        this._x = x;
+        this._y = y;
+    }
+
+    get x(){
+        return this._x;
+    }
+
+    get y(){
+        return this._y;
+    }
+};
+
+const simgwidth = 400;
+const simgheight = 482;
+const limgwidth = 1600;
+const limgheight = 1928;
+const ratio = limgwidth / simgwidth;
+const imgLeft = 0;
+const imgTop = 0;
+const $myCanvas = $('#myCanvas');
+
+
+const createImageEle = function(src){
+    const imgele = document.createElement('img');
+    imgele.src = src;
+    return imgele;
+}
+const img = createImageEle('./images/bumblebee_l.jpg');
+//const img = document.getElementById('imgg');
+
+const rotateZ = function(angle, pt){
+    const radius = angle * Math.PI / 180;
+    const newx = Math.cos(radius)*pt.x - Math.sin(radius)*pt.y;
+    const newy = Math.sin(radius)*pt.x + Math.cos(radius)*pt.y;
+    
+    let result = new cpoint(newx, newy);
+    
+    return result;
+}
+
+const setMagnifierPosBaseOnCursor = (event)=>{
+    $myCanvas.css('left', (event.clientX - $myCanvas.width()/2) + 'px');
+    $myCanvas.css('top', (event.clientY - $myCanvas.height()/2) + 'px');
+}
+
+const setBackgroundPosBaseOnMousePos = function(mousePosOnimg_x, mousePosOnimg_y){
+    
+    const ctx = $myCanvas[0].getContext('2d');
+    ctx.clearRect(0,0,$myCanvas.width(),$myCanvas.height());
+
+    ctx.drawImage(img, (-mousePosOnimg_x*ratio) + ($myCanvas.width()/2), (-mousePosOnimg_y*ratio) + ($myCanvas.height()/2));
+
+    let mouseshift = new cpoint(-mousePosOnimg_x*ratio + $myCanvas.width()/2, -mousePosOnimg_y*ratio + $myCanvas.height()/2);
+    let shift = new cpoint(164+limgwidth ,0);
+    let angle = 90;
+
+    let central = new cpoint(limgwidth/2, limgheight/2);
+    let rotated = rotateZ(angle, central);
+
+    let trans = new cpoint(central.x - rotated.x, central.y - rotated.y);
+    let rotatedTrans = rotateZ(-angle, trans);
+    let rotatedShift = rotateZ(-angle, shift);
+    let rotatedmouseShift = rotateZ(-angle, mouseshift);
+
+    ctx.rotate(angle * Math.PI/180);
+    ctx.translate(rotatedTrans.x + rotatedShift.x + rotatedmouseShift.x,rotatedTrans.y + rotatedShift.y + rotatedmouseShift.y);
+    ctx.drawImage(img, 0,0);
+    ctx.translate(-rotatedTrans.x - rotatedShift.x - rotatedmouseShift.x ,-rotatedTrans.y - rotatedShift.y - rotatedmouseShift.y);   
+    ctx.rotate(-angle * Math.PI/180);
+
+    //ctx.drawImage(img, -mousePosOnimg_x*ratio + $myCanvas.width()/2 + limgwidth, -mousePosOnimg_y*ratio + $myCanvas.height()/2);
+}
+
+const isCursorInsideImg = function(event){
+    if(event.clientX > imgLeft && event.clientX < imgLeft + simgwidth*2 &&
+       event.clientY > imgTop && event.clientY < imgTop + simgheight)
+        return true;
+    else
+        return false;
+}
+const toggleLimgContanVisible = (e)=>{
+
+    //$myCanvas.css('width', 600 + 'px');
+    //$myCanvas.css('height', 300 + 'px');
+
+    setMagnifierPosBaseOnCursor(e);
+    if($myCanvas.css('visibility') === 'hidden'){
+        $myCanvas.css('cursor', 'none');
+        $myCanvas.css('visibility','visible');
+    }
+    else{
+        $myCanvas.css('cursor', '');
+        $myCanvas.css('visibility','hidden');
+        //alert($myCanvas.width());
+        //alert($myCanvas.height());
+    }
+
+}
+
+const func = (event)=>{
+
+    document.oncontextmenu = function() {return false;};
+    if(event.button !== 0)
+        return;
+    
+    const mousePosOnimg_x = event.clientX-imgLeft;
+    const mousePosOnimg_y = event.clientY-imgTop;
+    if(isCursorInsideImg(event))
+        document.getElementById('pp').innerHTML = (mousePosOnimg_x) + ', ' + (mousePosOnimg_y);
+    else
+       return;
+
+    setBackgroundPosBaseOnMousePos(mousePosOnimg_x, mousePosOnimg_y);
+    toggleLimgContanVisible(event);
+    
+}
+
+const moveMagnifier = function(event){
+
+    setMagnifierPosBaseOnCursor(event);
+    const mousePosOnimg_x = event.clientX-imgLeft;
+    const mousePosOnimg_y = event.clientY-imgTop;
+    if(isCursorInsideImg(event))
+        document.getElementById('pp').innerHTML = (mousePosOnimg_x) + ', ' + (mousePosOnimg_y);
+    else
+       this.style.visibility ='hidden';
+
+    setBackgroundPosBaseOnMousePos(mousePosOnimg_x, mousePosOnimg_y);
+};
+
+$('body').on('mousedown', func);
+$myCanvas.on('mousemove', moveMagnifier);
+
+</script>
+
+</body>
+</html>

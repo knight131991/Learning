@@ -1,3 +1,4 @@
+import * as mymodule from "./object3D.js";
 class JButtonCreator{
     constructor(name, className){
         this._$button = jQuery('<button></button>');
@@ -5,7 +6,7 @@ class JButtonCreator{
         this._$button.addClass(className);
     }
 
-    registerSpecifyEvent(url){
+    registerSpecifyEventAndName(url){
         const func = ()=>{
             document.getElementById("myiframe").src = url;
         }
@@ -29,10 +30,27 @@ class JLabelCreator{
     }
 }
 
-const label1 = new JLabelCreator('Animation Example');
+
+const label_animation = new JLabelCreator('Animation Example');
+const label_experiment = new JLabelCreator('Experiments');
 
 const button1 = new JButtonCreator('Animation Sample 1', 'mybutton');
-button1.registerSpecifyEvent("AnimationSimple1.html");
+const button2 = new JButtonCreator('Animation Sample 2', 'mybutton');
+const button_magnifier = new JButtonCreator('Magnifier', 'mybutton');
+const button_magnifier2 = new JButtonCreator('Magnifier for mutiple images', 'mybutton');
+button1.registerSpecifyEventAndName("AnimationSimple1.html");
+button2.registerSpecifyEventAndName("AnimationSimple2.html");
+button_magnifier.registerSpecifyEventAndName("Magnifier.html");
+button_magnifier2.registerSpecifyEventAndName("Magnifier2.html");
 
-$('nav').append(label1.$label);
+$('nav').append(label_animation.$label);
 $('nav').append(button1.$button);
+$('nav').append(button2.$button);
+$('nav').append(label_experiment.$label);
+$('nav').append(button_magnifier.$button);
+$('nav').append(button_magnifier2.$button);
+
+
+
+const pt = new mymodule.CPoint(19, 11, 3);
+console.log('pt', pt.x, pt.y, pt.z);

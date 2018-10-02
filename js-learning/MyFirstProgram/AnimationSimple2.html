@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8">
+<meta name= "viewport" content="width = device-width">
+<script src= "https://code.jquery.com/jquery-1.10.2.js"></script>
+<title> Animation Simple 2</title>
+
+<style>
+*{
+    box-sizing: border-box;
+}
+
+#animation1{
+    width: 256px;
+    height: 256px;
+    background-image: url("./images/sprite2.png");
+    animation: mymove1 1s infinite;
+    animation-timing-function: step-start;
+}
+
+#animation2{
+    width: 79px;
+    height: 144px;
+    background-image: url("./images/sprite1.png");
+    animation: mymove2 0.9s infinite;
+    animation-timing-function: step-end;
+}
+
+    @keyframes mymove1 {
+        0%{
+            background-position: 0% 0%;
+        }
+        17%{
+            background-position: 20% 0%;
+        }
+        34%{
+            background-position: 40% 0%;
+        }
+        50%{
+            background-position: 60% 0%;
+        }
+        67%{
+            background-position: 80% 0%;
+        }
+        83%{
+            background-position: 100% 0%;
+        }
+    }
+
+        @keyframes mymove2 {
+        0%{
+            background-position: 0% 0%;
+        }
+        14%{
+            background-position: -77px 0%;
+        }
+        28%{
+            background-position: -143px 0%;
+        }
+        42%{
+            background-position: -213px 0%;
+        }
+        56%{
+            background-position: -300px 0%;
+        }
+        70%{
+            background-position: -390px 0%;
+        }
+        84%{
+            background-position: 100% 0%;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+<div id= "animation1"></div>
+<div id= "animation2"></div>
+
+
+</body>
+</html>

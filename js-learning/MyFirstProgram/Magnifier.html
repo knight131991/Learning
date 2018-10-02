@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8">
+<meta name= "viewport" content="width = device-width">
+<script src= "https://code.jquery.com/jquery-1.10.2.js"></script>
+<title>Magnifier</title>
+
+<style>
+*{
+    box-sizing: border-box;
+}
+
+#simg_container{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("./images/bumblebee_s.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+#myCanvas{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 30vw;
+    height: 30vw;
+    background-image: url("./images/bumblebee_l.jpg");
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    visibility: hidden;
+    border: 3px solid black;
+    border-radius: 50%;
+}
+
+</style>
+</head>
+
+<body>
+<div id= "simg_container"><p id = "pp">mouse position on img</p></div>
+<div id= "myCanvas"></div>
+<script>
+const container_width = $('#simg_container').width();
+const container_height = $('#simg_container').height();
+
+const simgwidth = 400;
+const simgheight = 482;
+const limgwidth = 1600;
+const limgheight = 1928;
+const ratio = limgwidth / simgwidth;
+const imgLeft = (container_width - simgwidth) / 2;
+const imgTop = (container_height - simgheight) / 2;
+const $limgContan = $('#myCanvas');
+
+const setMagnifierPosBaseOnCursor = (event)=>{
+    $limgContan.css('left', (event.clientX - $limgContan.width()/2) + 'px');
+    $limgContan.css('top', (event.clientY - $limgContan.height()/2) + 'px');
+}
+
+const setBackgroundPosBaseOnMousePos = function(mousePosOnimg_x, mousePosOnimg_y){
+    const posX = -mousePosOnimg_x*ratio + $limgContan.width()/2;
+    const posY = -mousePosOnimg_y*ratio + $limgContan.height()/2;
+    $limgContan.css('background-position',posX+'px '+posY+'px');
+}
+
+const isCursorInsideImg = function(event){
+    if(event.clientX > imgLeft && event.clientX < imgLeft + simgwidth &&
+       event.clientY > imgTop && event.clientY < imgTop + simgheight)
+        return true;
+    else
+        return false;
+}
+const toggleLimgContanVisible = (e)=>{
+
+    setMagnifierPosBaseOnCursor(e);
+    if($limgContan.css('visibility') === 'hidden'){
+        $limgContan.css('cursor', 'none');
+        $limgContan.css('visibility','visible');
+    }
+    else{
+        $limgContan.css('cursor', '');
+        $limgContan.css('visibility','hidden');
+    }
+
+}
+
+const func = (event)=>{
+
+    document.oncontextmenu = function() {return false;};
+    if(event.button !== 0)
+        return;
+
+    const mousePosOnimg_x = event.clientX-imgLeft;
+    const mousePosOnimg_y = event.clientY-imgTop;
+    if(isCursorInsideImg(event))
+        document.getElementById('pp').innerHTML = (mousePosOnimg_x) + ', ' + (mousePosOnimg_y);
+    else
+       return;
+
+    setBackgroundPosBaseOnMousePos(mousePosOnimg_x, mousePosOnimg_y);
+    toggleLimgContanVisible(event);
+    
+}
+
+const moveMagnifier = function(event){
+
+    setMagnifierPosBaseOnCursor(event);
+    const mousePosOnimg_x = event.clientX-imgLeft;
+    const mousePosOnimg_y = event.clientY-imgTop;
+    if(isCursorInsideImg(event))
+        document.getElementById('pp').innerHTML = (mousePosOnimg_x) + ', ' + (mousePosOnimg_y);
+    else
+       this.style.visibility ='hidden';
+
+    setBackgroundPosBaseOnMousePos(mousePosOnimg_x, mousePosOnimg_y);
+};
+
+$('body').on('mousedown', func);
+$limgContan.on('mousemove', moveMagnifier);
+
+</script>
+
+</body>
+</html>
