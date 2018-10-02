@@ -1,4 +1,5 @@
-import * as mymodule from "./object3D.js";
+import { CPoint } from "./object3D.js";
+
 class JButtonCreator{
     constructor(name, className){
         this._$button = jQuery('<button></button>');
@@ -52,5 +53,5 @@ $('nav').append(button_magnifier2.$button);
 
 
 
-const pt = new mymodule.CPoint(19, 11, 3);
+const pt = new CPoint(10, 2, 30);
 console.log('pt', pt.x, pt.y, pt.z);
