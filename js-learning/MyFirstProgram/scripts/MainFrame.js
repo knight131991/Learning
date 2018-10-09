@@ -39,10 +39,14 @@ const button1 = new JButtonCreator('Animation Sample 1', 'mybutton');
 const button2 = new JButtonCreator('Animation Sample 2', 'mybutton');
 const button_magnifier = new JButtonCreator('Magnifier', 'mybutton');
 const button_magnifier2 = new JButtonCreator('Magnifier for mutiple images', 'mybutton');
+const button_testingImportSass = new JButtonCreator('TestingImportSass', 'mybutton');
+const button_svgCanvas = new JButtonCreator('SVG Canvas', 'mybutton');
 button1.registerSpecifyEventAndName("AnimationSimple1.html");
 button2.registerSpecifyEventAndName("AnimationSimple2.html");
 button_magnifier.registerSpecifyEventAndName("Magnifier.html");
 button_magnifier2.registerSpecifyEventAndName("Magnifier2.html");
+button_testingImportSass.registerSpecifyEventAndName("TestingImportSass.html");
+button_svgCanvas.registerSpecifyEventAndName("SVGCanvas.html");
 
 $('nav').append(label_animation.$label);
 $('nav').append(button1.$button);
@@ -50,8 +54,10 @@ $('nav').append(button2.$button);
 $('nav').append(label_experiment.$label);
 $('nav').append(button_magnifier.$button);
 $('nav').append(button_magnifier2.$button);
+$('nav').append(button_testingImportSass.$button);
+$('nav').append(button_svgCanvas.$button);
 
 
 
-const pt = new CPoint(10, 2, 30);
+const pt = new CPoint(1, 2, 30);
 console.log('pt', pt.x, pt.y, pt.z);
