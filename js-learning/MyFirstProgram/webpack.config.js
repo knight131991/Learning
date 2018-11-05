@@ -40,6 +40,20 @@ module.exports =
     },
 
     {
+        entry: 
+            [
+            "./scripts/Snake/SnakeSVGCanvas.js",
+             "./scripts/Snake/Model.js",
+             "./scripts/Snake/Control.js"
+            ],
+        output: {
+            path: path.resolve(__dirname, './scripts/Snake'),
+            filename: 'SnakeSVGCanvas.build.js'
+        },
+        watch: true,
+    },
+
+    {
         entry: ["./styles/ImportingSass.scss", "./scripts/ImportingSass.js"],
         output: {
             path: path.resolve(__dirname, './scripts'),

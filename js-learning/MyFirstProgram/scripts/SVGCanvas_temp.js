@@ -29,8 +29,7 @@ import { CPoint, CVector } from "./object3D.js";
             
             const mousedownEven = (e) => {
                 mousedownPos = new CPoint(e.clientX, e.clientY);
-                const circle = new SVGRect(mousedownPos.x, mousedownPos.y);
-                console.log(circle);
+                const circle = new SVGMeasureLine(mousedownPos.x, mousedownPos.y);
                 this.addItem(circle);
                 this.draw();
             }
@@ -131,6 +130,25 @@ import { CPoint, CVector } from "./object3D.js";
 
         get $elem() { return this._$elem; }
 
+        get x() { return this._x; }
+
+        get y() { return this._y; }
+
+        set x(val) { this._x = val; }
+
+        set y(val) { this._y = val; }
+
+        getPos() {
+            return new CPoint(this._x, this._y);
+        }
+
+        resetPos(pos) {
+            this._x = pos.x;
+            this._y = pos.y;
+            this._elem.setAttribute("x", `${pos.x}px`);
+            this._elem.setAttribute("y", `${pos.y}px`);
+        }
+
         resetGeometry(vec) {
             this._width = (vec.x);
             this._height = (vec.y);
@@ -226,5 +244,5 @@ import { CPoint, CVector } from "./object3D.js";
         }
     }
 
-    const svgCanvas = new SVGCanvas();
-    svgCanvas.appendTo(document.body);
+export default SVGCanvas;
+export { SVGObject, SVGCircle, SVGRect };

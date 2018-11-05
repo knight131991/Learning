@@ -11,6 +11,12 @@ export class CPoint {
 
     get z() { return this._z;}
 
+    set x(val) {this._x = val;}
+
+    set y(val) {this._y = val;}
+
+    set z(val) {this._z = val;}
+
 }
 
 export class CVector {
