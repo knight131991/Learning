@@ -26,7 +26,6 @@ class ModelSnake {
         const valY = parseInt(Math.random() * this.numY * 100);
         this.applePos.x = (valX % (this.numX - 1)) * this.space;
         this.applePos.y = (valY % (this.numY - 1)) * this.space;
-        console.log('podss', this.applePos.x);
         return this.applePos;
     }
 
@@ -73,12 +72,6 @@ class ModelSnake {
                 return true;
             } else 
             return false;
-
-        // if (Math.abs(this.applePos.x - snakePos.x) < 20 
-        //     && Math.abs(this.applePos.y - snakePos.y) < 20) {
-        //         return true;
-        //     } else 
-        //     return false;
     }
 }
 

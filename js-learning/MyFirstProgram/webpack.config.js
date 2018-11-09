@@ -8,6 +8,9 @@ module.exports =
             path: path.resolve(__dirname, './scripts'),
             filename: "MainFrame.build.js"
         },
+        optimization: {
+            minimize: false
+        },
         watch: true,
     }, 
 
@@ -17,27 +20,12 @@ module.exports =
             path: path.resolve(__dirname, './scripts'),
             filename: "SVGCanvas_temp.build.js"
         },
+        optimization: {
+            minimize: false
+        },
         watch: true,
     }, 
 
-    {
-        entry: "./scripts/ImportingSass.js",
-        output: {
-            path: path.resolve(__dirname, './scripts'),
-            filename: "ImportingSass.build.js"
-        },
-        watch: true,
-    
-        module: {
-            rules: 
-            [
-                {
-                    test: /\.css$/,
-                    use: [ 'style-loader', 'css-loader' ]
-                }
-            ]
-        }
-    },
 
     {
         entry: 
@@ -50,6 +38,9 @@ module.exports =
             path: path.resolve(__dirname, './scripts/Snake'),
             filename: 'SnakeSVGCanvas.build.js'
         },
+        optimization: {
+            minimize: false
+        },
         watch: true,
     },
 
@@ -59,14 +50,18 @@ module.exports =
             path: path.resolve(__dirname, './scripts'),
             filename: "ImportingSass.build.js"
         },
+        optimization: {
+            minimize: false
+        },
         watch: true,
+        
 
         module: {
             rules:
             [
                 {
                     test: /\.(scss|sass)$/,
-                    use:[ 'style-loader', 'css-loader', 'sass-loader' ]
+                    use:[ 'style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
                 }
             ]
         }

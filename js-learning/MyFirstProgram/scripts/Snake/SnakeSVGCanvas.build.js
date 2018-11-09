@@ -1,1 +1,784 @@
-!function(t){var e={};function s(i){if(e[i])return e[i].exports;var h=e[i]={i:i,l:!1,exports:{}};return t[i].call(h.exports,h,h.exports,s),h.l=!0,h.exports}s.m=t,s.c=e,s.d=function(t,e,i){s.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:i})},s.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},s.t=function(t,e){if(1&e&&(t=s(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var i=Object.create(null);if(s.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var h in t)s.d(i,h,function(e){return t[e]}.bind(null,h));return i},s.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return s.d(e,"a",e),e},s.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},s.p="",s(s.s=3)}([function(t,e,s){"use strict";s.d(e,"a",function(){return i}),s.d(e,"b",function(){return h});class i{constructor(t=0,e=0,s=0){this._x=t,this._y=e,this._z=s}get x(){return this._x}get y(){return this._y}get z(){return this._z}set x(t){this._x=t}set y(t){this._y=t}set z(t){this._z=t}}class h{constructor(t=0,e=0,s=0){this._x=t,this._y=e,this._z=s}length(){return Math.sqrt(this._x*this._x+this._y*this._y+this._z*this._z)}set x(t){this._x=t}set y(t){this._y=t}set z(t){this._z=t}get x(){return this._x}get y(){return this._y}get z(){return this._z}}},function(t,e,s){"use strict";s.r(e);var i=s(0);e.default=class{constructor(t,e,s){this.numX=0,this.numY=0,this.step=5,this.snakePos=[],this.space=t,this.fieldW=e,this.fieldH=s,this.currentDire=null,this.applePos=new i.a(0,0),this.numXandY(e,s),this.calApplePos()}numXandY(t,e){this.numX=t/this.space,this.numY=e/this.space}calApplePos(){const t=parseInt(Math.random()*this.numX*100),e=parseInt(Math.random()*this.numY*100);return this.applePos.x=t%(this.numX-1)*this.space,this.applePos.y=e%(this.numY-1)*this.space,console.log("podss",this.applePos.x),this.applePos}updateSnakePos(t){this.snakePos=t}isFail(t){return!(!this.isHitBound(t)&&!this.isSelfIntersection())}isHitBound(t){return t.x/this.space>this.numX-1||t.y/this.space>this.numY-1||t.x<0||t.y<0}isSelfIntersection(){const t=this.snakePos[0];for(let e=1;e<this.snakePos.length;e++)if(t.x===this.snakePos[e].x&&t.y===this.snakePos[e].y)return!0;return!1}isSnakeGetApple(t){return this.applePos.x===t.x&&this.applePos.y===t.y}}},function(t,e,s){"use strict";s.r(e);var i=s(0);class h{constructor(){this._elem=null}drawTo(t){}resetGeometry(t){}}class n extends h{constructor(t=0,e=0,s=5,i="red"){super(),this._cx=t,this._cy=e,this._r=s,this._colorStr=i,this._elem=document.createElementNS("http://www.w3.org/2000/svg","circle"),this._elem.setAttribute("cx",`${t}px`),this._elem.setAttribute("cy",`${e}px`),this._elem.setAttribute("r",`${s}px`),this._elem.setAttribute("fill",i),this._$elem=$(this._elem)}get elem(){return this._elem}get $elem(){return this._$elem}get cx(){return this._cx}get cy(){return this._cy}set cx(t){this._cx=t,this._elem.setAttribute("cx",`${this._cx}px`)}set cy(t){this._cy=t,this._elem.setAttribute("cy",`${this._cy}px`)}resetGeometry(t){this._r=t.length(),this._elem.setAttribute("r",`${this._r}px`)}drawTo(t){this._$elem.appendTo(t)}}class r extends h{constructor(t=0,e=0,s=5,i=5,h="blue"){super(),this._x=t,this._y=e,this._width=s,this._height=i,this._colorStr=h,this._elem=document.createElementNS("http://www.w3.org/2000/svg","rect"),this._elem.setAttribute("x",`${t}px`),this._elem.setAttribute("y",`${e}px`),this._elem.setAttribute("width",`${s}px`),this._elem.setAttribute("height",`${i}px`),this._elem.setAttribute("fill",h),this._$elem=$(this._elem)}get elem(){return this._elem}get $elem(){return this._$elem}get x(){return this._x}get y(){return this._y}set x(t){this._x=t}set y(t){this._y=t}getPos(){return new i.a(this._x,this._y)}resetPos(t){this._x=t.x,this._y=t.y,this._elem.setAttribute("x",`${t.x}px`),this._elem.setAttribute("y",`${t.y}px`)}resetGeometry(t){this._width=t.x,this._height=t.y,this._elem.setAttribute("width",`${this._width}px`),this._elem.setAttribute("height",`${this._height}px`)}drawTo(t){this._$elem.appendTo(t)}}class l extends h{constructor(t=0,e=0,s=1,i="blue"){super(),this._x1=t,this._x2=t,this._y1=e,this._y2=e,this._colorStr=i,this._elem=document.createElementNS("http://www.w3.org/2000/svg","line"),this._elem.setAttribute("x1",`${t}px`),this._elem.setAttribute("y1",`${e}px`),this._elem.setAttribute("x2",`${t}px`),this._elem.setAttribute("y2",`${e}px`),this._elem.setAttribute("stroke-width",`${s}px`),this._elem.setAttribute("stroke",i),this._$elem=$(this._elem)}get elem(){return this._elem}get $elem(){return this._$elem}get x1(){return this._x1}get y1(){return this._y1}get x2(){return this._x2}get y2(){return this._y2}set x2(t){this._x2=t,this._elem.setAttribute("x2",`${this._x2}px`)}set y2(t){this._y2=t,this._elem.setAttribute("y2",`${this._y2}px`)}resetGeometry(t){this._x2=t.x+this._x1,this._y2=t.y+this._y1,this._elem.setAttribute("x2",`${this._x2}px`),this._elem.setAttribute("y2",`${this._y2}px`)}drawTo(t){this._$elem.appendTo(t)}}class a extends h{constructor(t=0,e=0,s=5,i=1,h="blue"){super(),this.StartCircle=new n(t,e,s,h),this.EndCircle=new n(t,e,s,h),this.line=new l(t,e,i,h),this._elem=[],this._$elem=[],this._elem.push(this.StartCircle.elem),this._elem.push(this.line.elem),this._elem.push(this.EndCircle.elem),this._$elem.push(this.StartCircle.$elem),this._$elem.push(this.line.$elem),this._$elem.push(this.EndCircle.$elem)}get elem(){return this._elem}resetGeometry(t){this.line.x2=t.x+this.line.x1,this.line.y2=t.y+this.line.y1,this.EndCircle.cx=t.x+this.StartCircle.cx,this.EndCircle.cy=t.y+this.StartCircle.cy}drawTo(t){this._$elem.forEach(e=>{e.appendTo(t)})}}var o=class{constructor(){this._elem=document.createElementNS("http://www.w3.org/2000/svg","svg"),this._elem.classList.add("SVGCanvas"),this._$elem=$(this._elem),this._items=[],this.bindMouseEvent()}draw(){this._items.forEach(t=>{t.drawTo(this._elem)})}addItem(t){this._items.push(t)}clearAllItems(){this._items=[],this._$elem.empty()}bindMouseEvent(){let t;const e=e=>{t=new i.a(e.clientX,e.clientY);const s=new a(t.x,t.y);this.addItem(s),this.draw()},s=e=>{const s=new i.b(e.clientX-t.x,e.clientY-t.y);this._items[this._items.length-1].resetGeometry(s)};this._$elem.mousedown(t=>{e(t),this._$elem.mousemove(s)}),this._$elem.mouseup(t=>{this._$elem.unbind("mousemove",s)})}appendTo(t){this._$elem.appendTo(t)}};class u extends h{constructor(t=0,e=0,s=5,i="blue"){super(),this.startRect=new r(t,e,s,s,i),this.space=s,this._units=[],this._units.push(this.startRect),this._units.push(new r(t-s,e,s,s,i)),this._units.push(new r(t-s,e,s,s,i)),this._units.push(new r(t-s,e,s,s,i)),this._units.push(new r(t-s,e,s,s,i))}move(t,e){for(let t=this._units.length-1;t>0;t-=1){const e=t-1;this._units[t].resetPos(this._units[e].getPos())}const s=this.startRect.x+t,h=this.startRect.y+e;this.startRect.resetPos(new i.a(s,h))}addUnit(){const t=this.space,e=this._units[this._units.length-1],s=parseInt(e.x/t,10)*t,i=parseInt(e.y/t,10)*t,h=new r(s,i,t,t);this._units.push(h)}drawTo(t){this._units.forEach(e=>{e.$elem.appendTo(t)})}firstElemPos(){return new i.a(this.startRect.x,this.startRect.y)}allElemPos(){return this._units.map(t=>t.getPos())}}e.default=class extends o{constructor(t){super(),this.unitSize=t,this.snake=new u(20,20,t),this.apple=new r(60,60,t,t,"blueviolet"),this._items.push(this.snake),this._items.push(this.apple),this.draw()}prependTo(t){this._$elem.prependTo(t)}initial(t){this.snake.startRect.x=20,this.snake.startRect.y=20;for(let t=5;t<this.snake._units.length;t+=1)delete this.snake._units[t];this.snake._units.length=5,this.apple.resetPos(t),this.clearAllItems(),this._items.push(this.snake),this._items.push(this.apple),this.draw()}SVGSnakeMove(t,e){this.snake.move(t,e)}snakeHeadPos(){return this.snake.firstElemPos()}snakePos(){return this.snake.allElemPos()}resetApplePos(t){this.apple.resetPos(t)}increaseSnake(t){for(let e=0;e<t;e+=1)this.snake.addUnit()}width(){return this._$elem.width()}height(){return this._$elem.height()}bindMouseEvent(){}}},function(t,e,s){s(2),s(1),t.exports=s(4)},function(t,e,s){"use strict";s.r(e);var i=s(2),h=s(1);(new class{constructor(){this.svgCanvas=new i.default(20),this.svgCanvas.prependTo(document.getElementById("MainDiv")),this.model=new h.default(20,this.svgCanvas.width(),this.svgCanvas.height()),this.stepCount=0,this.requestID=null,this.isStarted=!1,this.triggeredEvents=[],this.currentKeyEvent=this.right,this.initial()}startGame(){const t=()=>{this.changeCurrentEvent(),this.checkCondition(),this.currentKeyEvent(),console.log(this.svgCanvas.snakeHeadPos()),this.model.updateSnakePos(this.svgCanvas.snakePos()),this.stepCount+=this.model.step,this.requestID=window.requestAnimationFrame(t)};this.requestID=window.requestAnimationFrame(t)}initial(){this.currentKeyEvent=this.right,this.svgCanvas.initial(this.model.calApplePos()),this.svgCanvas.resetApplePos(this.model.calApplePos()),this.stepCount=0}changeCurrentEvent(){this.stepCount%20==0&&this.triggeredEvents.length>0&&(this.currentKeyEvent=this.triggeredEvents[0],this.triggeredEvents.shift(),this.stepCount=0)}appendTriggeredEvent(t){if(this.triggeredEvents.length>0){const e=this.triggeredEvents.length-1;t!==this.triggeredEvents[e]&&this.triggeredEvents.push(t)}else this.triggeredEvents.push(t)}stopGame(){null!==this.requestID&&window.cancelAnimationFrame(this.requestID)}finishGame(){}toggleGame(){!0===this.isStarted?(this.stopGame(),this.isStarted=!1):(this.startGame(),this.isStarted=!0)}checkCondition(){if(this.model.isFail(this.svgCanvas.snakeHeadPos())&&(alert("fail"),this.initial()),this.model.isSnakeGetApple(this.svgCanvas.snakeHeadPos())){console.log(this.svgCanvas.snakeHeadPos());const t=this.model.calApplePos();this.svgCanvas.resetApplePos(t),this.svgCanvas.increaseSnake(20/this.model.step),this.svgCanvas.draw()}}left(){this.svgCanvas.SVGSnakeMove(-this.model.step,0)}up(){this.svgCanvas.SVGSnakeMove(0,-this.model.step)}right(){this.svgCanvas.SVGSnakeMove(this.model.step,0)}down(){this.svgCanvas.SVGSnakeMove(0,this.model.step)}bindKeyBoardEvent(){$(document).keydown(t=>{switch(t.which||t.keyCode){case 37:this.currentKeyEvent!==this.right&&this.appendTriggeredEvent(this.left);break;case 38:this.currentKeyEvent!==this.down&&this.appendTriggeredEvent(this.up);break;case 39:this.currentKeyEvent!==this.left&&this.appendTriggeredEvent(this.right);break;case 40:this.currentKeyEvent!==this.up&&this.appendTriggeredEvent(this.down);break;case 32:case 229:this.toggleGame()}})}}).bindKeyBoardEvent()}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CPoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CVector; });
+class CPoint {
+    constructor(x = 0, y = 0, z = 0) {
+        this._x = x;
+        this._y = y;
+        this._z = z;
+    }
+
+    get x() { return this._x;}
+
+    get y() { return this._y;}
+
+    get z() { return this._z;}
+
+    set x(val) {this._x = val;}
+
+    set y(val) {this._y = val;}
+
+    set z(val) {this._z = val;}
+
+}
+
+class CVector {
+    constructor (x = 0, y = 0, z = 0) {
+        this._x = x;
+        this._y = y;
+        this._z = z;
+    }
+
+    length() {
+        return Math.sqrt((this._x * this._x) + (this._y * this._y) + (this._z * this._z));
+    }
+
+    set x(value) { this._x = value; }
+
+    set y(value) { this._y = value; }
+
+    set z(value) { this._z = value; }
+
+    get x() { return this._x; }
+
+    get y() { return this._y; }
+
+    get z() { return this._z; }
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _object3D__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+
+
+class ModelSnake {
+    constructor(space, fieldW, fieldH) {
+        this.numX = 0;
+        this.numY = 0;
+        this.step = 5;
+        this.snakePos = [];
+        this.space = space;
+        this.fieldW = fieldW;
+        this.fieldH = fieldH;
+        this.currentDire = null;
+        this.applePos = new _object3D__WEBPACK_IMPORTED_MODULE_0__[/* CPoint */ "a"](0, 0);
+
+        this.numXandY(fieldW, fieldH);
+        this.calApplePos();
+    }
+
+    numXandY(fieldW, fieldH) {
+        this.numX = fieldW / this.space;
+        this.numY = fieldH / this.space;
+    }
+
+    calApplePos() {
+        const valX = parseInt(Math.random() * this.numX * 100);
+        const valY = parseInt(Math.random() * this.numY * 100);
+        this.applePos.x = (valX % (this.numX - 1)) * this.space;
+        this.applePos.y = (valY % (this.numY - 1)) * this.space;
+        return this.applePos;
+    }
+
+    updateSnakePos (snakeArr) {
+        this.snakePos = snakeArr;
+    }
+
+    isFail(pos) {
+        if(this.isHitBound(pos) 
+        ||this.isSelfIntersection()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    isHitBound(pos) {
+        if(
+            pos.x / this.space > this.numX - 1
+            || pos.y / this.space > this.numY - 1
+            || pos.x < 0
+            || pos.y < 0) {
+                return true;
+        } else {
+            return false;
+        }
+    }
+
+    isSelfIntersection () {
+        const snakeHead = this.snakePos[0];
+        for(let i = 1; i < this.snakePos.length; i++) {
+            if (snakeHead.x === this.snakePos[i].x 
+                && snakeHead.y === this.snakePos[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isSnakeGetApple (snakePos) {
+        if (this.applePos.x === snakePos.x 
+            && this.applePos.y === snakePos.y) {
+                return true;
+            } else 
+            return false;
+    }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ModelSnake);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./scripts/object3D.js
+var object3D = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./scripts/SVGCanvas_temp.js
+
+
+    class SVGCanvas_temp_SVGCanvas{
+        constructor(){
+            this._elem = document.createElementNS("http://www.w3.org/2000/svg",'svg');
+            this._elem.classList.add('SVGCanvas');
+            this._$elem = $(this._elem);
+            this._items = [];
+            this.bindMouseEvent();
+        }
+
+        draw() {
+            this._items.forEach((item)=> {
+                item.drawTo(this._elem);
+            })
+        }
+
+        addItem(item) {
+            this._items.push(item);
+        }
+
+        clearAllItems() {
+            this._items = [];
+            this._$elem.empty();
+        }
+
+        bindMouseEvent() {
+            let mousedownPos;
+            
+            const mousedownEven = (e) => {
+                mousedownPos = new object3D["a" /* CPoint */](e.clientX, e.clientY);
+                const circle = new SVGMeasureLine(mousedownPos.x, mousedownPos.y);
+                this.addItem(circle);
+                this.draw();
+            }
+
+            const mousemoveEvent = (e) => {
+                const moveVec = new object3D["b" /* CVector */](e.clientX - mousedownPos.x, e.clientY - mousedownPos.y);
+                this._items[this._items.length -1 ].resetGeometry(moveVec);
+            }
+
+            this._$elem.mousedown((e) => {
+                mousedownEven(e);
+                this._$elem.mousemove(mousemoveEvent);
+            });
+
+
+            this._$elem.mouseup((e) => {
+                this._$elem.unbind('mousemove', mousemoveEvent);
+            })
+
+        }
+
+        appendTo(elem) {
+            this._$elem.appendTo(elem);
+        }
+    }
+
+    class SVGObject{
+        constructor() {
+            this._elem = null;
+        }
+
+        drawTo(elem) {}
+
+        resetGeometry(vec) {}
+    }
+
+    class SVGCircle extends SVGObject{
+        constructor(cx = 0, cy = 0, r = 5, colorStr = 'red') {
+            super();
+            this._cx = cx;
+            this._cy = cy;
+            this._r = r;
+            this._colorStr = colorStr;
+            this._elem = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            this._elem.setAttribute("cx", `${cx}px`);
+            this._elem.setAttribute("cy", `${cy}px`);
+            this._elem.setAttribute("r", `${r}px`);
+            this._elem.setAttribute("fill", colorStr);
+            this._$elem = $(this._elem);
+        }
+
+        get elem() { return this._elem; }
+
+        get $elem() { return this._$elem; }
+
+        get cx() { return this._cx; }
+
+        get cy() { return this._cy; }
+
+        set cx(val) { 
+            this._cx = val; 
+            this._elem.setAttribute("cx", `${this._cx}px`);
+        }
+
+        set cy(val) {
+            this._cy = val;
+            this._elem.setAttribute("cy", `${this._cy}px`);}
+
+        resetGeometry(vec) {
+            this._r = (vec.length());
+            this._elem.setAttribute("r", `${this._r}px`);
+        }
+
+        drawTo(elem) {
+            this._$elem.appendTo(elem);
+        }
+
+    }
+
+    class SVGCanvas_temp_SVGRect extends SVGObject{
+        constructor(x = 0, y = 0, width = 5, height = 5, colorStr = 'blue') {
+            super();
+            this._x = x;
+            this._y = y;
+            this._width = width;
+            this._height = height;
+            this._colorStr = colorStr;
+            this._elem = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            this._elem.setAttribute("x", `${x}px`);
+            this._elem.setAttribute("y", `${y}px`);
+            this._elem.setAttribute("width", `${width}px`);
+            this._elem.setAttribute("height", `${height}px`);
+            this._elem.setAttribute("fill", colorStr);
+            this._$elem = $(this._elem);
+        }
+
+        get elem() { return this._elem; }
+
+        get $elem() { return this._$elem; }
+
+        get x() { return this._x; }
+
+        get y() { return this._y; }
+
+        set x(val) { this._x = val; }
+
+        set y(val) { this._y = val; }
+
+        getPos() {
+            return new object3D["a" /* CPoint */](this._x, this._y);
+        }
+
+        resetPos(pos) {
+            this._x = pos.x;
+            this._y = pos.y;
+            this._elem.setAttribute("x", `${pos.x}px`);
+            this._elem.setAttribute("y", `${pos.y}px`);
+        }
+
+        resetGeometry(vec) {
+            this._width = (vec.x);
+            this._height = (vec.y);
+            this._elem.setAttribute("width", `${this._width}px`);
+            this._elem.setAttribute("height", `${this._height}px`);
+        }
+
+        drawTo(elem) {
+            this._$elem.appendTo(elem);
+        }
+    }
+
+    class SVGLine extends SVGObject{
+        constructor(x1 = 0, y1 = 0, width = 1, colorStr = 'blue') {
+            super();
+            this._x1 = x1;
+            this._x2 = x1;
+            this._y1 = y1;
+            this._y2 = y1;
+            this._colorStr = colorStr;
+            this._elem = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            this._elem.setAttribute("x1", `${x1}px`);
+            this._elem.setAttribute("y1", `${y1}px`);
+            this._elem.setAttribute("x2", `${x1}px`);
+            this._elem.setAttribute("y2", `${y1}px`);
+            this._elem.setAttribute("stroke-width", `${width}px`);
+            this._elem.setAttribute("stroke", colorStr);
+            this._$elem = $(this._elem);
+        }
+
+        get elem() { return this._elem; }
+
+        get $elem() { return this._$elem; }
+
+        get x1() { return this._x1; }
+
+        get y1() { return this._y1; }
+
+        get x2() { return this._x2; }
+
+        get y2() { return this._y2; }
+
+        set x2(val) {
+            this._x2 = val;
+            this._elem.setAttribute("x2", `${this._x2}px`);
+        }
+        
+        set y2(val) {
+            this._y2 = val;
+            this._elem.setAttribute("y2", `${this._y2}px`);}
+
+        resetGeometry(vec) {
+            this._x2 = vec.x + this._x1;
+            this._y2 = vec.y + this._y1;
+            this._elem.setAttribute("x2", `${this._x2}px`);
+            this._elem.setAttribute("y2", `${this._y2}px`);
+        }
+
+        drawTo(elem) {
+            this._$elem.appendTo(elem);
+        }
+    }
+
+    class SVGMeasureLine extends SVGObject{
+        constructor(x1 = 0, y1 = 0, circleR = 5, width = 1, colorStr = 'blue') {
+            super();
+            this.StartCircle = new SVGCircle(x1, y1, circleR, colorStr);
+            this.EndCircle = new SVGCircle(x1, y1, circleR, colorStr);
+            this.line = new SVGLine(x1, y1, width, colorStr);
+            this._elem = [];
+            this._$elem = [];
+            this._elem.push(this.StartCircle.elem);
+            this._elem.push(this.line.elem);            
+            this._elem.push(this.EndCircle.elem);            
+            this._$elem.push(this.StartCircle.$elem);
+            this._$elem.push(this.line.$elem);
+            this._$elem.push(this.EndCircle.$elem);
+        }
+
+        get elem() { return this._elem; }
+
+        resetGeometry(vec) {
+            this.line.x2 = vec.x + this.line.x1;
+            this.line.y2 = vec.y + this.line.y1;
+            this.EndCircle.cx = vec.x + this.StartCircle.cx;
+            this.EndCircle.cy = vec.y + this.StartCircle.cy;
+        }
+
+        drawTo(elem) {
+            this._$elem.forEach((item) => {
+                item.appendTo(elem);
+            })
+        }
+    }
+
+/* harmony default export */ var SVGCanvas_temp = (SVGCanvas_temp_SVGCanvas);
+
+
+// CONCATENATED MODULE: ./scripts/Snake/SnakeSVGCanvas.js
+
+
+
+class SnakeSVGCanvas_SnakeSVGCanvas extends SVGCanvas_temp {
+    constructor(unitSize) {
+        super();
+        this.unitSize = unitSize;
+        this.snake = new SnakeSVGCanvas_SVGSnake(20, 20, unitSize);
+        this.apple = new SVGCanvas_temp_SVGRect(60, 60, unitSize, unitSize, 'blueviolet');
+        this._items.push(this.snake);
+        this._items.push(this.apple);
+        this.draw();
+    }
+
+    prependTo(elem) {
+        this._$elem.prependTo(elem);
+    }
+
+    initial(applePos) {
+        this.snake.startRect.x = 20;
+        this.snake.startRect.y = 20;
+        for(let i = 5; i < this.snake._units.length; i += 1) {
+            delete this.snake._units[i];
+        }
+        this.snake._units.length = 5;
+        this.apple.resetPos(applePos);
+
+        this.clearAllItems();
+        this._items.push(this.snake);
+        this._items.push(this.apple);
+        this.draw();
+    }
+
+    SVGSnakeMove(x, y) {
+        this.snake.move(x, y);
+    }
+
+    snakeHeadPos() {
+        return this.snake.firstElemPos();
+    }
+
+    snakePos() {
+        return this.snake.allElemPos();
+    }
+
+    resetApplePos(pos) {
+        this.apple.resetPos(pos);
+    }
+
+    increaseSnake(time) {
+        for(let i = 0; i < time; i += 1) {
+            this.snake.addUnit();
+        }
+    }
+
+    width() {
+        return this._$elem.width();
+    }
+
+    height() {
+        return this._$elem.height();
+    }
+    
+    bindMouseEvent() {}
+
+}
+
+class SnakeSVGCanvas_SVGSnake extends SVGObject {
+    constructor(x = 0, y = 0, space = 5, colorStr = 'blue') {
+        super();
+        this.startRect = new SVGCanvas_temp_SVGRect(x, y, space, space, colorStr);
+        this.space = space;
+        this._units = [];
+        this._units.push(this.startRect); 
+        this._units.push(new SVGCanvas_temp_SVGRect(x - space, y, space, space, colorStr));
+        this._units.push(new SVGCanvas_temp_SVGRect(x - space, y, space, space, colorStr));
+        this._units.push(new SVGCanvas_temp_SVGRect(x - space, y, space, space, colorStr));
+        this._units.push(new SVGCanvas_temp_SVGRect(x - space, y, space, space, colorStr));
+
+    }
+
+    move(x, y) {
+        for(let i = this._units.length - 1; i > 0; i -= 1) {
+            const previous = i - 1;
+            //console.log('possss', this._units[previous].getPos());
+            this._units[i].resetPos(this._units[previous].getPos());
+        }
+
+        const posX = this.startRect.x + x;
+        const posY = this.startRect.y + y;
+        this.startRect.resetPos(new object3D["a" /* CPoint */](posX, posY));
+    }
+
+    addUnit() {
+        const space = this.space;
+        const lastUnit = this._units[this._units.length - 1];
+        const unitX = parseInt(lastUnit.x / space, 10) * space;
+        const unitY = parseInt(lastUnit.y / space, 10) * space;
+        const unit = new SVGCanvas_temp_SVGRect(unitX, unitY, space, space);
+        this._units.push(unit);
+    }
+
+    drawTo(elem) {
+        this._units.forEach((item) => {
+            item.$elem.appendTo(elem);
+        })
+    }
+
+    firstElemPos() {
+        return new object3D["a" /* CPoint */](this.startRect.x, this.startRect.y);
+    }
+
+    allElemPos() {
+        const result = this._units.map(element => element.getPos());
+        return result;
+    }
+}
+
+/* harmony default export */ var Snake_SnakeSVGCanvas = __webpack_exports__["default"] = (SnakeSVGCanvas_SnakeSVGCanvas);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2);
+__webpack_require__(1);
+module.exports = __webpack_require__(4);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SnakeSVGCanvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+
+
+
+class ControlSnake {
+    constructor() {
+        this.svgCanvas = new _SnakeSVGCanvas__WEBPACK_IMPORTED_MODULE_0__["default"](20);
+        this.svgCanvas.prependTo(document.getElementById('MainDiv'));
+        this.model = new _Model__WEBPACK_IMPORTED_MODULE_1__["default"](20, this.svgCanvas.width(), this.svgCanvas.height());
+        this.stepCount = 0;
+        this.requestID = null;
+        this.isStarted = false;
+        this.triggeredEvents = [];
+        this.currentKeyEvent = this.right;
+
+        this.initial();
+    }
+
+    startGame() {
+        const move = () => {
+            
+            this.changeCurrentEvent();
+            this.checkCondition();
+            this.currentKeyEvent();
+            console.log(this.svgCanvas.snakeHeadPos());
+            this.model.updateSnakePos(this.svgCanvas.snakePos());
+            this.stepCount += this.model.step;
+
+            this.requestID = window.requestAnimationFrame(move);
+        }
+        this.requestID = window.requestAnimationFrame(move);
+    }
+
+    initial() {
+        this.currentKeyEvent = this.right;
+        this.svgCanvas.initial(this.model.calApplePos());
+        this.svgCanvas.resetApplePos(this.model.calApplePos());
+        this.stepCount = 0;
+    }
+
+    changeCurrentEvent() {
+        if(this.stepCount % 20 === 0 && this.triggeredEvents.length > 0) {
+            this.currentKeyEvent = this.triggeredEvents[0];
+            this.triggeredEvents.shift();
+            this.stepCount = 0;
+        }
+    }
+
+    appendTriggeredEvent(event) {
+        if (this.triggeredEvents.length > 0) {
+            const last = this.triggeredEvents.length - 1;
+            if(event !== this.triggeredEvents[last]) {
+                this.triggeredEvents.push(event);
+            }
+        } else {
+            this.triggeredEvents.push(event);
+        }
+    }
+
+    stopGame() {
+        if(this.requestID !== null) {
+            window.cancelAnimationFrame(this.requestID);
+        }
+    }
+
+    finishGame() {
+
+    }
+
+    toggleGame() {
+        if(this.isStarted === true) {
+            this.stopGame();
+            this.isStarted = false;
+        } else {
+            this.startGame();
+            this.isStarted = true;
+        }
+    }
+
+    checkCondition() {
+        if (this.model.isFail(this.svgCanvas.snakeHeadPos())) {
+            alert('fail');
+            this.initial();
+        }
+
+        if (this.model.isSnakeGetApple(this.svgCanvas.snakeHeadPos())) {
+            console.log(this.svgCanvas.snakeHeadPos());
+            const applePos = this.model.calApplePos();
+            this.svgCanvas.resetApplePos(applePos);
+            this.svgCanvas.increaseSnake(20 / this.model.step);
+            this.svgCanvas.draw();
+        }
+    }
+
+    left() {                
+        this.svgCanvas.SVGSnakeMove(-this.model.step,0);
+    }
+
+    up() {                                
+        this.svgCanvas.SVGSnakeMove(0,-this.model.step);
+    }
+
+    right() {                        
+        this.svgCanvas.SVGSnakeMove(this.model.step,0);
+    }
+
+    down() {                                 
+        this.svgCanvas.SVGSnakeMove(0,this.model.step);
+    }
+
+    bindKeyBoardEvent() {
+        const keyBoardEvent = (event) => {
+            // if (this.stepCount < 20) return;
+            // this.stepCount = 0;
+
+            const key = event.which || event.keyCode;
+            switch (key) {
+            case 37:
+                if(this.currentKeyEvent !== this.right) {
+                    //this.currentKeyEvent = this.left;
+                    this.appendTriggeredEvent(this.left);
+                }
+                break;
+            case 38:
+                if(this.currentKeyEvent !== this.down) {
+                    //this.currentKeyEvent = this.up;
+                    this.appendTriggeredEvent(this.up);
+                }
+                break;
+            case 39:
+                if(this.currentKeyEvent !== this.left) {
+                    //this.currentKeyEvent = this.right;
+                    this.appendTriggeredEvent(this.right);
+                }
+                break;
+            case 40:
+                if(this.currentKeyEvent !== this.up) {
+                    //this.currentKeyEvent = this.down;
+                    this.appendTriggeredEvent(this.down);
+                }
+                break;
+            case 32: 
+            case 229:
+                this.toggleGame();
+            default:
+                break;
+            }
+        }
+
+        $(document).keydown(keyBoardEvent);
+    }
+}
+
+const controlSnake = new ControlSnake();
+controlSnake.bindKeyBoardEvent();
+// controlSnake.startGame();
+
+
+
+
+/***/ })
+/******/ ]);
