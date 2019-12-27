@@ -66,4 +66,40 @@ module.exports =
             ]
         }
     },
+
+    // for React
+    {
+        entry: ".src/index.js",
+        mode: "development",
+        module: {
+            rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /(node_modules|scripts)/,
+                    // loader is a shorthand for the use property
+                    loader: "babel-loader",
+                    options: { presets: ["@babel/env"] }
+                },
+                {
+                    test: /\.css$/,
+                    use: ["style-loader", "css-loader"]
+                }
+            ]
+        },
+        resolve: {
+            // allows us to specify which extensions Webpack will resolve — this allows us to import modules without needing to add their extensions.
+            extensions: [".js", ".jsx"]
+        },
+        output: {
+            path: path.resolve(__dirname, "dist_react/"),
+            //  The publicPath property specifies what directory the bundle should go in, and also tells webpack-dev-server where to serve files from.
+            publicPath: "/dist_react/",
+            filename: "bundle.js"
+        },
+        devServer: {
+            contentBase: path.join(__dirname, "public/"),
+            port: 3000,
+            publicPath: "http://localhost:3000/dist/",
+        }
+    }
 ]
