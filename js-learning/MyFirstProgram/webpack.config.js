@@ -86,6 +86,7 @@ module.exports =
                 }
             ]
         },
+        // These options change how modules are resolved.
         resolve: {
             // allows us to specify which extensions Webpack will resolve — this allows us to import modules without needing to add their extensions.
             extensions: [".js", ".jsx"]
