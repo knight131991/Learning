@@ -4,6 +4,7 @@
   "description": "this is my first program for website",
   "main": "scripts/MainFrame.js",
   "scripts": {
+    "start_react": "webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "node_modules/.bin/webpack"
   },
@@ -21,6 +22,7 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "autoprefixer": "^9.3.1",
+    "babel-loader": "^8.0.6",
     "browserslist": "^4.3.4",
     "css-loader": "^1.0.0",
     "node-sass": "^4.9.3",
