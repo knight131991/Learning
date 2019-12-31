@@ -74,6 +74,13 @@ module.exports =
         module: {
             rules: [
                 {
+                    // To be safe, you can use enforce: 'pre' section to check source files, not modified by other loaders (like babel-loader)
+                    enforce: "pre",
+                    test: /\.(js|jsx)$/,
+                    exclude: /(node_modules|scripts)/,
+                    loader: "eslint-loader",
+                },
+                {
                     test: /\.(js|jsx)$/,
                     exclude: /(node_modules|scripts)/,
                     // loader is a shorthand for the use property
