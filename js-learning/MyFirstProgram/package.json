@@ -6,13 +6,16 @@
   "scripts": {
     "start_react": "webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "node_modules/.bin/webpack"
+    "webpack": "node_modules/.bin/webpack",
+    "prettier": "node_modules/.bin/prettier --write \"src_react/**/*.jsx\" \"src_react/**/*.js\"",
+    "prettier-check": "node_modules/.bin/prettier --check \"src_react/**/*.jsx\" \"src_react/**/*.js\""
   },
   "author": "Jack",
   "license": "ISC",
   "dependencies": {
     "http-server": "^0.11.1",
     "jquery": "^3.3.1",
+    "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
@@ -26,7 +29,9 @@
     "browserslist": "^4.3.4",
     "css-loader": "^1.0.0",
     "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
     "eslint-loader": "^3.0.3",
+    "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
     "node-sass": "^4.9.3",
     "postcss": "^7.0.5",
