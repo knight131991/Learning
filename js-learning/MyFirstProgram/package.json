@@ -8,7 +8,8 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "webpack": "node_modules/.bin/webpack",
         "prettier": "node_modules/.bin/prettier --write \"src_react/**/*.jsx\" \"src_react/**/*.js\"",
-        "prettier-check": "node_modules/.bin/prettier --check \"src_react/**/*.jsx\" \"src_react/**/*.js\""
+        "prettier-check": "node_modules/.bin/prettier --check \"src_react/**/*.jsx\" \"src_react/**/*.js\"",
+        "eslint": "node_modules/.bin/eslint ./src_react/ --ext .jsx,.js"
     },
     "author": "Jack",
     "license": "ISC",
@@ -32,7 +33,9 @@
         "css-loader": "^1.0.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.9.0",
+        "eslint-import-resolver-webpack": "^0.12.1",
         "eslint-loader": "^3.0.3",
+        "eslint-plugin-import": "^2.20.1",
         "eslint-plugin-prettier": "^3.1.2",
         "eslint-plugin-react": "^7.17.0",
         "node-sass": "^4.9.3",
