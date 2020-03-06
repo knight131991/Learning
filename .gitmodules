@@ -1,0 +1,3 @@
+[submodule "js-learning/MyFirstProgram/dmsui-test"]
+	path = js-learning/MyFirstProgram/dmsui-test
+	url = http://10.136.129.8/tzu.chieh.lin/dmsui-test.git
