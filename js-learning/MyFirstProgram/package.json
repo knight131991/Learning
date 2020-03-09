@@ -4,7 +4,7 @@
     "description": "this is my first program for website",
     "main": "scripts/MainFrame.js",
     "scripts": {
-        "start_react": "webpack-dev-server --mode development",
+        "start_react": "webpack-dev-server --mode development --config-name react",
         "test": "echo \"Error: no test specified\" && exit 1",
         "webpack": "node_modules/.bin/webpack",
         "prettier": "node_modules/.bin/prettier --write \"src_react/**/*.jsx\" \"src_react/**/*.js\"",

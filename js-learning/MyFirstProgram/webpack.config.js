@@ -74,6 +74,7 @@ module.exports =
         // @babel/polyfill (This will emulate a full ES2015+ environment) (https://babeljs.io/docs/en/babel-polyfill)
         entry: ["@babel/polyfill", "./src_react/index.js"],
         mode: "development",
+        name: 'react',
         module: {
             rules: [
                 {
