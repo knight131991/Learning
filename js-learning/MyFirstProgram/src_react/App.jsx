@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { hot } from 'react-hot-loader/root'
 import GreenCard from './Components/GreenCard'
 import { Select, Button } from 'antd'
 import 'antd/dist/antd.css'
@@ -19,4 +20,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default hot(App)

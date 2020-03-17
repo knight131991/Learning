@@ -99,7 +99,10 @@ module.exports =
         // These options change how modules are resolved.
         resolve: {
             // allows us to specify which extensions Webpack will resolve — this allows us to import modules without needing to add their extensions.
-            extensions: [".js", ".jsx"]
+            extensions: [".js", ".jsx"], 
+            alias: {
+                'react-dom': '@hot-loader/react-dom',
+              },
         },
         output: {
             path: path.resolve(__dirname, "dist_react/"),
@@ -114,7 +117,9 @@ module.exports =
             // Tells dev-server to open the browser after server had been started.
             open: true,
             // When using the HTML5 History API, the index.html page will likely have to be served in place of any 404 responses.
-            historyApiFallback: true
+            historyApiFallback: true,
+            // Enable webpack's Hot Module Replacement feature
+            hot: true,
         }
     }
 ]
