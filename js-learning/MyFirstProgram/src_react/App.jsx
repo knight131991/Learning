@@ -1,23 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { hot } from 'react-hot-loader/root'
-import GreenCard from './Components/GreenCard'
-import { Select, Button } from 'antd'
+import { Table } from 'antd'
 import 'antd/dist/antd.css'
+import data from './Asset/data'
+import columns from './Asset/columns'
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Hello React!</h1>
-                <Select defaultValue="1">
-                    <Select.Option value="1">中文</Select.Option>
-                    <Select.Option value="2">English</Select.Option>
-                </Select>
-                <Button>Click me!</Button>
-                <GreenCard content="hahahahaha" height="100px" />
-            </div>
-        )
-    }
+const App = () => {
+    return (
+        <div>
+            <h1>ESLint Report</h1>
+            <Table columns={columns} dataSource={data} />
+        </div>
+    )
 }
 
 export default hot(App)
