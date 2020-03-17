@@ -81,7 +81,6 @@ module.exports =
                     // To be safe, you can use enforce: 'pre' section to check source files, not modified by other loaders (like babel-loader)
                     enforce: "pre",
                     test: /\.(js|jsx)$/,
-                    exclude: /(node_modules|scripts)/,
                     loader: "eslint-loader",
                 },
                 {
@@ -112,6 +111,10 @@ module.exports =
             contentBase: path.join(__dirname, "public/"),
             port: 3000,
             publicPath: "http://localhost:3000/dist_react/",
+            // Tells dev-server to open the browser after server had been started.
+            open: true,
+            // When using the HTML5 History API, the index.html page will likely have to be served in place of any 404 responses.
+            historyApiFallback: true
         }
     }
 ]
