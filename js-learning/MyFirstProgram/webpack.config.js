@@ -75,6 +75,7 @@ module.exports =
         entry: ["@babel/polyfill", "./src_react/index.js"],
         mode: "development",
         name: 'react',
+        devtool: 'cheap-module-eval-source-map',
         module: {
             rules: [
                 {
