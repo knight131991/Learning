@@ -30,18 +30,22 @@ exec(command, (error, stdout, stderr) => {
                     rule: result[4],
                 }
             })
+            if(data.length === 0) {
+                console.log('\x1b[31m%s\x1b[0m', stderr)
+                return;
+            }
         let htmlContent = fs.readFileSync('./index_copy.html').toString()
         htmlContent = htmlContent.replace('{replace me haha}', JSON.stringify(data))
         fs.writeFile('./index.html', htmlContent, err => {
             if (err) throw err
+            console.log('\x1b[32m%s\x1b[0m', 'Done!!')
+            exec('start ./index.html')
         })
-        console.error('\x1b[32m%s\x1b[0m', 'Done!!')
-        exec('start ./index.html')
         return
     }
     if (stderr) {
-        console.log(`stderr: ${stderr}`)
+        console.error('\x1b[31m%s\x1b[0m', stderr)
         return
     }
-    console.log(`stdout: ${stdout}`)
+    console.log('\x1b[32m%s\x1b[0m', "Congrtulation!! Don't find any problem!!")
 })

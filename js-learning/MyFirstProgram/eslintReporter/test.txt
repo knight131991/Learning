@@ -1,4 +1,0 @@
-C:\Users\TZU.CHIEH.LIN\Desktop\Learning\js-learning\MyFirstProgram\src_react\Components\test.js: line 2, col 23, Error - Unable to resolve path to module './Components/GreenCard'. (import/no-unresolved)
-C:\Users\TZU.CHIEH.LIN\Desktop\Learning\js-learning\MyFirstProgram\src_react\App.jsx: line 6, col 1, Error - 'sdfsdf' is not defined. (no-undef)
-
-2 problems
