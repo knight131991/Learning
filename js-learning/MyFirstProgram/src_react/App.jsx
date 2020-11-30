@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader/root'
 import GreenCard from './Components/GreenCard'
 import { Select, Button } from 'antd'
 import 'antd/dist/antd.css'
+import TusUploador from './Components/TusUploador'
 
 class App extends Component {
     render() {
@@ -15,6 +16,7 @@ class App extends Component {
                 </Select>
                 <Button>Click me!</Button>
                 <GreenCard content="hahahahaha" height="100px" />
+                <TusUploador></TusUploador>
             </div>
         )
     }
