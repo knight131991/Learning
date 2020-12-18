@@ -1,0 +1,199 @@
+<style>
+    html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #0F0F0F;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+label {
+  display: none;
+}
+
+.controls label[for="finish"] {
+    display: block;
+}
+
+#task-name {
+  color: white;
+}
+
+.container {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  margin: 20px auto 0;
+  width: 90vw;
+  max-width: 400px;
+  text-align: center;
+}
+
+time {
+  font-size: 30px;
+  height: 1em;
+  line-height: 1em;
+  display: inline-block;
+  overflow: hidden;
+  animation-name: none;
+  animation-play-state: paused;
+  color: #fff;
+}
+
+time i,
+time b {
+  float: left;
+  font-style: normal;
+  font-weight: 100;
+  animation-name: inherit;
+  animation-play-state: inherit;
+}
+
+.container > time b {
+  height: 1em;
+  min-width: 0.3em;
+  padding-top: 0.3em;
+}
+
+.container > time b::before,
+.container > time b::after {
+  content: '';
+  display: block;
+  width: 0.08em;
+  height: 0.08em;
+  background-color: currentColor;
+  border-radius: 100%;
+  margin: 0 auto 0.29em;
+}
+
+time i::before,
+time i::after {
+  content: '0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9\A 0';
+  white-space: pre;
+  animation-name: inherit;
+  animation-play-state: inherit;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(10);
+  float: left;
+  margin: 0 0.02em;
+}
+
+time i:first-child::before,
+time i:nth-of-type(2)::before {
+  content: '0\A 1\A 2\A 3\A 4\A 5\A 0';
+  animation-timing-function: steps(6);
+}
+
+time i:first-child::before {
+  animation-duration: 3600s;
+}
+
+time i:first-child::after {
+  animation-duration: 600s;
+}
+
+time i:nth-of-type(2)::before {
+  animation-duration: 60s;
+}
+
+time i:nth-of-type(2)::after {
+  animation-duration: 10s;
+}
+
+.controls {
+position: relative;
+  height: 80px;
+}
+
+.controls > div {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  cursor: pointer;
+  font-size: 16px;
+  border: 2px solid #353535;
+  background-color: #353535;
+  box-shadow: inset 0 0 0 2px #0F0F0F;
+  color: #ccc;
+  width: 60px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 56px;
+}
+
+label[for="start"] {
+  background-color: #182E1C;
+  border-color: #182E1C;
+  color: #42CC57;
+}
+
+label[for="stop"] {
+  background-color: #351614;
+  border-color: #351614;
+  color: #FF352C;
+}
+
+label[for="finish"] {
+  left: 70px;
+  margin-left: 24px;
+}
+
+/* Visible control conditions */
+#start:checked ~ .controls label[for="stop"],
+#stop:checked ~ .controls label[for="start"]{
+  display: block;
+}
+
+
+#stop:checked ~ time{
+    animation-name: digit;
+}
+
+#start:checked ~ time{
+  animation-name: digit;
+  animation-play-state: running;
+}
+
+body, form {
+    /* -webkit-user-select: none; */
+  /* -webkit-app-region: drag; */
+}
+
+@keyframes digit {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% + 1em));
+  }
+}
+</style>
+
+
+
+<form class="container">
+  <input type="radio" id="stop" name="control">
+  <input type="radio" id="start" name="control"  checked="checked">
+  <input type="reset" id="finish" name="control" onclick="javascript:window.close()">
+
+  <h3 id='task-name'></h3>
+  <p id='task-description' style="display: none"></p>
+
+  <time><i></i><b></b><i></i></time>
+
+  <div class="controls">
+    <div>
+      <label for="stop">Stop</label>
+      <label for="start">Start</label>
+      <label for="finish">Finish</label>
+    </div>
+  </div>
+</form>
+
+<script src="./stopwatch-render-process.js"></script>

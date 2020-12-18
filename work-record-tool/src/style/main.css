@@ -1,0 +1,42 @@
+.full-height-layout {
+  height: 100vh;
+}
+
+.grown-width-flex-box {
+  display: flex;
+  flex-grow: 1;
+}
+
+#main-section {
+  overflow-y: auto;
+}
+
+#main-section > section {
+  width: 100%;
+}
+
+#sidebar {
+  padding-top: 12px;
+  min-width: 150px;
+  border-right: 1px #ccc solid;
+}
+
+.card-margin {
+  margin: 12px;
+}
+
+.t-b-margin {
+  margin: 12px 0;
+}
+
+.is-show {
+  display: block;
+}
+
+.is-hidden {
+  display: none;
+}
+
+#task-viewer-container {
+  padding: 12px;
+}

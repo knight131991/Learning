@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="./src/style/main.css" rel ="stylesheet" >
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Work Record Tool</title>
+  </head>
+  <body>
+    <div>
+      <div class="d-flex flex-row">
+        <nav id="sidebar" class="full-height-layout"><ul class="nav nav-pills flex-column" id="sidebar-ul"></ul></nav>
+        <main id = 'main-section' class="full-height-layout grown-width-flex-box"></main>
+      </div>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+    <script src="./src/assets/load-sections.js"></script>
+    <script src="./src/assets/load-sections-render-process.js"></script>
+    <script src="./src/sidebar/sidebar-render-process.js"></script>
+  </body>
+</html>
