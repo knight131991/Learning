@@ -8,6 +8,7 @@
 const appendTaskToTaskList = require("./src/assets/append-task-to-task-list");
 const createFolder = require("./src/assets/create-folder");
 const createTaskCard = require("./src/assets/create-task-card");
+const { increaseIndex } = require("./src/assets/index-handler");
 
 require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   appendTaskToTaskList("./data/task-list.json", arg);
@@ -15,7 +16,7 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
     title: arg.taskName,
     timeList: arg.timeList,
     description: arg.taskDescription,
-    id: `${new Date().getTime().toString()}num`,
+    id: increaseIndex(),
   });
   const taskViewerContainer = document.getElementById("task-viewer-container");
   taskViewerContainer.insertBefore(
@@ -25,3 +26,4 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
 });
 
 createFolder("./data/task-list.json");
+createFolder("./data/index.json");
