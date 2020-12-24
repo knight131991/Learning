@@ -1,6 +1,7 @@
 require("jquery");
 require("bootstrap/js/dist/collapse");
 const MyDate = require("../assets/time-handler");
+const createStopwatchBrowser = require("./create-stopwatch-browser");
 
 // module.exports = taskCardCreator = ({ title, timeList, description, id }) => `
 //   <div class="card card-margin">
@@ -131,6 +132,18 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
     ...["append-time-list-btn", "btn", "btn-info", "b-margin", "l-margin"]
   );
   appendTimeBtn.innerText = "繼續計時!";
+  appendTimeBtn.addEventListener("click", () => {
+    const win = createStopwatchBrowser();
+
+    win.webContents.on("did-finish-load", () => {
+      win.webContents.send("task-info", {
+        taskName: title,
+        taskDescription: description,
+        id,
+      });
+      win.show();
+    });
+  });
   cardBody.appendChild(appendTimeBtn);
 
   const collapseCard = document.createElement("div");
