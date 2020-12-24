@@ -18,24 +18,24 @@ class MyDate {
     const year = time.getFullYear();
     const month = time.getMonth() + 1;
     const day = time.getDate();
-    const hour = time.getHours();
-    const minute = time.getMinutes();
-    const second = time.getSeconds();
+    const hour = `0${time.getHours()}`.slice(-2);
+    const minute = `0${time.getMinutes()}`.slice(-2);
+    const second = `0${time.getSeconds()}`.slice(-2);
     return `${year}/${month}/${day}${
       showTime ? `  ${hour}:${minute}:${second}` : ""
     } `;
   }
 
   getDurationSecond() {
-    return Math.floor((this.duration / 1000) % 60);
+    return `0${Math.floor((this.duration / 1000) % 60)}`.slice(-2);
   }
 
   getDurationMinute() {
-    return Math.floor((this.duration / 1000 / 60) % 60);
+    return `0${Math.floor((this.duration / 1000 / 60) % 60)}`.slice(-2);
   }
 
   getDurationHour() {
-    return Math.floor(this.duration / 1000 / 60 / 60);
+    return `0${Math.floor(this.duration / 1000 / 60 / 60)}`.slice(-2);
   }
 
   getFormatedDuration(showSecond) {

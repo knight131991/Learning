@@ -29,6 +29,14 @@
   margin: 12px 0;
 }
 
+.b-margin {
+  margin-bottom: 12px;
+}
+
+.l-margin {
+  margin-left: 12px;
+}
+
 .is-show {
   display: block;
 }
