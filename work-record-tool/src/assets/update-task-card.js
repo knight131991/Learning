@@ -1,6 +1,7 @@
 const {
   createCardDescription,
   createCardTimeListEle,
+  calTotalDurationTime,
 } = require("./create-task-card");
 
 const updateTaskCard = (taskId, { title, description, timeList }) => {
@@ -27,6 +28,12 @@ const updateTaskCard = (taskId, { title, description, timeList }) => {
   }
 
   if (timeList) {
+    const durationEle = taskCard.querySelector(`#duration-${taskId}`);
+    const totalDurtionTime = calTotalDurationTime(timeList);
+    durationEle.textContent = `進行時間 : ${totalDurtionTime.getFormatedDuration(
+      true
+    )}`;
+
     const timeListEle = createCardTimeListEle(timeList);
     const collapsedArea = taskCard.querySelector(`#demo${taskId}`);
     collapsedArea.removeChild(collapsedArea.firstChild);

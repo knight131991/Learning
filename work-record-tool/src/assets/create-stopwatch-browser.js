@@ -6,7 +6,7 @@ const createStopwatchBrowser = () => {
   let win = new BrowserWindow({
     show: false,
     width: 450,
-    height: 200,
+    height: 210,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,

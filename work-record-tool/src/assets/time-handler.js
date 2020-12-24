@@ -1,15 +1,20 @@
 class MyDate {
   constructor(startTime, endTime) {
-    const start = new Date(startTime);
-    const end = new Date(endTime);
-    this.duration = end - start;
+    if (endTime) {
+      const start = new Date(startTime);
+      const end = new Date(endTime);
+      this.duration = end - start;
+    } else {
+      console.log("duration", startTime);
+      this.duration = new Date(startTime);
+    }
   }
 
   static getFormatedTime(inputTime, showSecond) {
     const time = new Date(inputTime);
-    const hour = time.getHours();
-    const minute = time.getMinutes();
-    const second = time.getSeconds();
+    const hour = `0${time.getHours()}`.slice(-2);
+    const minute = `0${time.getMinutes()}`.slice(-2);
+    const second = `0${time.getSeconds()}`.slice(-2);
     return `${hour}:${minute}${showSecond ? `:${second}` : ""}`;
   }
 
@@ -24,6 +29,10 @@ class MyDate {
     return `${year}/${month}/${day}${
       showTime ? `  ${hour}:${minute}:${second}` : ""
     } `;
+  }
+
+  getDuration() {
+    return this.duration;
   }
 
   getDurationSecond() {

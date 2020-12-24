@@ -64,11 +64,11 @@ const createCardTimeListEle = (timeList) => {
     liEle.appendChild(flexDiv);
 
     const startTimeSpan = document.createElement("span");
-    startTimeSpan.innerText = MyDate.getFormatedTime(start, true);
+    startTimeSpan.innerText = MyDate.getFormatedDate(start, true);
     flexDiv.appendChild(startTimeSpan);
 
     const endTimeSpan = document.createElement("span");
-    endTimeSpan.innerText = MyDate.getFormatedTime(end, true);
+    endTimeSpan.innerText = MyDate.getFormatedDate(end, true);
     flexDiv.appendChild(endTimeSpan);
 
     const durationTimeSpan = document.createElement("span");
@@ -79,6 +79,14 @@ const createCardTimeListEle = (timeList) => {
   });
 
   return ulEle;
+};
+
+const calTotalDurationTime = (timeList) => {
+  const spentTime = timeList.reduce((pre, cur) => {
+    const curDuration = new MyDate(cur.start, cur.end).getDuration();
+    return pre + curDuration;
+  }, 0);
+  return new MyDate(spentTime);
 };
 
 const taskCardCreator = ({ title, timeList, description, id }) => {
@@ -95,10 +103,6 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
   cardBody.classList.add(["card-body"]);
   cardContainer.appendChild(cardBody);
 
-  const titleDate = document.createElement("h6");
-  titleDate.innerText = MyDate.getFormatedDate(timeList[0].start);
-  cardBody.appendChild(titleDate);
-
   if (description) {
     const titleDescrip = createCardDescription(id, description);
     cardBody.appendChild(titleDescrip);
@@ -106,10 +110,10 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
 
   const titleDuration = document.createElement("h6");
   titleDuration.id = `duration-${id}`;
-  titleDuration.innerText = `進行時間 : ${new MyDate(
-    timeList[0].start,
-    timeList[timeList.length - 1].end
-  ).getFormatedDuration(true)}`;
+  const totalDurtionTime = calTotalDurationTime(timeList);
+  titleDuration.innerText = `進行時間 : ${totalDurtionTime.getFormatedDuration(
+    true
+  )}`;
   cardBody.appendChild(titleDuration);
 
   cardBody.appendChild(document.createElement("br"));
@@ -144,4 +148,5 @@ module.exports = {
   createCardDescription,
   taskCardCreator,
   createCardTimeListEle,
+  calTotalDurationTime,
 };
