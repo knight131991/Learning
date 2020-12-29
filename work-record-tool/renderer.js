@@ -11,6 +11,7 @@ const { taskCardCreator } = require("./src/assets/create-task-card");
 const { increaseIndex } = require("./src/assets/index-handler");
 const updateSpecificTask = require("./src/assets/update-specific-task");
 const updateTaskCard = require("./src/assets/update-task-card");
+require("./src/assets/scheduler");
 
 require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   if (!arg.id) {

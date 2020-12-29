@@ -120,6 +120,7 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
   cardBody.appendChild(document.createElement("br"));
 
   const collapseBtn = document.createElement("button");
+  
   collapseBtn.type = "button";
   collapseBtn.classList.add(...["btn", "btn-info", "b-margin"]);
   collapseBtn.setAttribute("data-toggle", "collapse");
