@@ -12,6 +12,7 @@ const { increaseIndex } = require("./src/assets/index-handler");
 const updateSpecificTask = require("./src/assets/update-specific-task");
 const updateTaskCard = require("./src/assets/update-task-card");
 require("./src/assets/scheduler");
+require("./src/assets/greetings");
 
 require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   if (!arg.id) {

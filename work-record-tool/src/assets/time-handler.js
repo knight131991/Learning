@@ -5,7 +5,6 @@ class MyDate {
       const end = new Date(endTime);
       this.duration = end - start;
     } else {
-      console.log("duration", startTime);
       this.duration = new Date(startTime);
     }
   }
