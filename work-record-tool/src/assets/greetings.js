@@ -16,13 +16,18 @@ const greeting = () => {
   });
 };
 
+const writeCurTimeToFile = () => {
+  const curTime = { launchTime: new Date().getTime() };
+  fs.writeFileSync(launchTimeFilePath, JSON.stringify(curTime));
+};
+
 if (isFileExist) {
   const data = JSON.parse(fs.readFileSync(launchTimeFilePath));
   if (new Date().getDate() !== new Date(data.launchTime).getDate()) {
     greeting();
   }
+  writeCurTimeToFile();
 } else {
-  const curTime = { launchTime: new Date().getTime() };
-  fs.writeFileSync(launchTimeFilePath, JSON.stringify(curTime));
+  writeCurTimeToFile();
   greeting();
 }
