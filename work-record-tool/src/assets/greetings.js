@@ -1,4 +1,5 @@
 const fs = require("fs");
+const createFolder = require("./create-folder");
 const MyDate = require("./time-handler");
 
 const launchTimeFilePath = "./data/launch-time.json";
@@ -21,13 +22,14 @@ const writeCurTimeToFile = () => {
   fs.writeFileSync(launchTimeFilePath, JSON.stringify(curTime));
 };
 
-if (isFileExist) {
-  const data = JSON.parse(fs.readFileSync(launchTimeFilePath));
-  if (new Date().getDate() !== new Date(data.launchTime).getDate()) {
-    greeting();
-  }
+if (!isFileExist) {
+  createFolder(launchTimeFilePath);
   writeCurTimeToFile();
-} else {
-  writeCurTimeToFile();
+  return;
+}
+
+const data = JSON.parse(fs.readFileSync(launchTimeFilePath));
+if (new Date().getDate() !== new Date(data.launchTime).getDate()) {
   greeting();
 }
+writeCurTimeToFile();
