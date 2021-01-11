@@ -5,6 +5,7 @@
 // selectively enable features needed in the rendering
 // process.
 
+const path = require("path");
 const appendTaskToTaskList = require("./src/assets/append-task-to-task-list");
 const createFolder = require("./src/assets/create-folder");
 const { taskCardCreator } = require("./src/assets/create-task-card");
@@ -31,12 +32,18 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
       taskViewerContainer.firstChild
     );
 
-    appendTaskToTaskList("./data/task-list.json", { ...arg, id: taskId });
+    appendTaskToTaskList(path.resolve(__dirname, "data/task-list.json"), {
+      ...arg,
+      id: taskId,
+    });
   } else {
     const taskId = arg.id;
 
     const allTaskInfo = JSON.parse(
-      fs.readFileSync("./data/task-list.json", "utf-8") || "[]"
+      fs.readFileSync(
+        path.resolve(__dirname, "data/task-list.json"),
+        "utf-8"
+      ) || "[]"
     );
     const taskInfo = allTaskInfo.filter(({ id }) => id === taskId).pop();
     const timeList = [...taskInfo.timeList, ...arg.timeList];
@@ -51,5 +58,5 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   }
 });
 
-createFolder("./data/task-list.json");
-createFolder("./data/index.json");
+createFolder(path.resolve(__dirname, "data/task-list.json"));
+createFolder(path.resolve(__dirname, "data/index.json"));

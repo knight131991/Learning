@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = (filePath) => {
   const dirName = path.dirname(filePath);
-  dirName.split("/").reduce((pre, cur) => {
+  dirName.split(/\\|\//).reduce((pre, cur) => {
     if (pre === "") {
       return cur;
     }

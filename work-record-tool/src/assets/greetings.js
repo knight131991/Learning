@@ -1,8 +1,9 @@
 const fs = require("fs");
+const path = require("path");
 const createFolder = require("./create-folder");
 const MyDate = require("./time-handler");
 
-const launchTimeFilePath = "./data/launch-time.json";
+const launchTimeFilePath = path.resolve(__dirname, "../../data/launch-time.json");
 const isFileExist = fs.existsSync(launchTimeFilePath);
 
 const greeting = () => {

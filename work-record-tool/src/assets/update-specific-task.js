@@ -1,6 +1,9 @@
 const updateSpecificTask = (id, { taskName, taskDescription, timeList }) => {
   const data = JSON.parse(
-    fs.readFileSync("./data/task-list.json", "utf-8") || "[]"
+    fs.readFileSync(
+      path.resolve(__dirname, "../../data/task-list.json"),
+      "utf-8"
+    ) || "[]"
   );
 
   const result = data.map((item) => {
@@ -10,7 +13,10 @@ const updateSpecificTask = (id, { taskName, taskDescription, timeList }) => {
     return item;
   });
 
-  fs.writeFileSync("./data/task-list.json", JSON.stringify(result));
+  fs.writeFileSync(
+    path.resolve(__dirname, "../../data/task-list.json"),
+    JSON.stringify(result)
+  );
 };
 
 module.exports = updateSpecificTask;

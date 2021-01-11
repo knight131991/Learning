@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");
 
 const sections = [
   { name: "task-creator", path: "./src/task-creator/index.html" },
