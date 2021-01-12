@@ -48,3 +48,7 @@
 #task-viewer-container {
   padding: 12px;
 }
+
+.pre-wrap {
+  white-space: pre;
+}

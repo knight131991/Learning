@@ -30,6 +30,14 @@ class MyDate {
     } `;
   }
 
+  static getTimeListDuration(timeList) {
+    const spentTime = timeList.reduce((pre, cur) => {
+      const curDuration = new MyDate(cur.start, cur.end).getDuration();
+      return pre + curDuration;
+    }, 0);
+    return new MyDate(spentTime);
+  }
+
   getDuration() {
     return this.duration;
   }

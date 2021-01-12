@@ -1,8 +1,8 @@
 const {
   createCardDescription,
   createCardTimeListEle,
-  calTotalDurationTime,
 } = require("./create-task-card");
+const MyDate = require("./time-handler");
 
 const updateTaskCard = (taskId, { title, description, timeList }) => {
   const taskCard = document.getElementById(`task-card-${taskId}`);
@@ -29,7 +29,7 @@ const updateTaskCard = (taskId, { title, description, timeList }) => {
 
   if (timeList) {
     const durationEle = taskCard.querySelector(`#duration-${taskId}`);
-    const totalDurtionTime = calTotalDurationTime(timeList);
+    const totalDurtionTime = MyDate.getTimeListDuration(timeList);
     durationEle.textContent = `進行時間 : ${totalDurtionTime.getFormatedDuration(
       true
     )}`;

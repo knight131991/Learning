@@ -82,18 +82,10 @@ const createCardTimeListEle = (timeList) => {
   return ulEle;
 };
 
-const calTotalDurationTime = (timeList) => {
-  const spentTime = timeList.reduce((pre, cur) => {
-    const curDuration = new MyDate(cur.start, cur.end).getDuration();
-    return pre + curDuration;
-  }, 0);
-  return new MyDate(spentTime);
-};
-
 const taskCardCreator = ({ title, timeList, description, id }) => {
   const cardContainer = document.createElement("div");
   cardContainer.id = `task-card-${id}`;
-  cardContainer.classList.add(...["card", "card-margin"]);
+  cardContainer.classList.add(...["card", "t-b-margin"]);
 
   const cardHeader = document.createElement("div");
   cardHeader.classList.add(["card-header"]);
@@ -111,7 +103,7 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
 
   const titleDuration = document.createElement("h6");
   titleDuration.id = `duration-${id}`;
-  const totalDurtionTime = calTotalDurationTime(timeList);
+  const totalDurtionTime = MyDate.getTimeListDuration(timeList);
   titleDuration.innerText = `進行時間 : ${totalDurtionTime.getFormatedDuration(
     true
   )}`;
@@ -120,7 +112,7 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
   cardBody.appendChild(document.createElement("br"));
 
   const collapseBtn = document.createElement("button");
-  
+
   collapseBtn.type = "button";
   collapseBtn.classList.add(...["btn", "btn-info", "b-margin"]);
   collapseBtn.setAttribute("data-toggle", "collapse");
@@ -162,5 +154,4 @@ module.exports = {
   createCardDescription,
   taskCardCreator,
   createCardTimeListEle,
-  calTotalDurationTime,
 };

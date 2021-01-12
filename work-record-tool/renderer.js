@@ -25,7 +25,7 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
       id: taskId,
     });
     const taskViewerContainer = document.getElementById(
-      "task-viewer-container"
+      "task-viewer-task-list-container"
     );
     taskViewerContainer.insertBefore(
       taskItemCard,
