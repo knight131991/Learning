@@ -9,6 +9,7 @@ const path = require("path");
 const appendTaskToTaskList = require("./src/assets/append-task-to-task-list");
 const createFolder = require("./src/assets/create-folder");
 const { taskCardCreator } = require("./src/assets/create-task-card");
+const getTaskList = require("./src/assets/get-task-list");
 const { increaseIndex } = require("./src/assets/index-handler");
 const updateSpecificTask = require("./src/assets/update-specific-task");
 const updateTaskCard = require("./src/assets/update-task-card");
@@ -39,12 +40,7 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   } else {
     const taskId = arg.id;
 
-    const allTaskInfo = JSON.parse(
-      fs.readFileSync(
-        path.resolve(__dirname, "data/task-list.json"),
-        "utf-8"
-      ) || "[]"
-    );
+    const allTaskInfo = getTaskList();
     const taskInfo = allTaskInfo.filter(({ id }) => id === taskId).pop();
     const timeList = [...taskInfo.timeList, ...arg.timeList];
 

@@ -1,7 +1,10 @@
 require("jquery");
 require("bootstrap/js/dist/collapse");
+require("bootstrap/js/dist/modal");
 const MyDate = require("../assets/time-handler");
+const createIconBtn = require("./create-icon-button");
 const createStopwatchBrowser = require("./create-stopwatch-browser");
+const getTaskList = require("./get-task-list");
 
 // module.exports = taskCardCreator = ({ title, timeList, description, id }) => `
 //   <div class="card card-margin">
@@ -42,6 +45,42 @@ const createStopwatchBrowser = require("./create-stopwatch-browser");
 //     </div>
 //   </div>
 // `;
+
+const createEditableTimeListEle = (timeList) => {
+  const ulEle = document.createElement("ul");
+  ulEle.id = "task-edit-modal-time-list";
+  ulEle.classList.add(["list-group"]);
+
+  timeList.forEach(({ start, end }) => {
+    const liEle = document.createElement("li");
+    liEle.classList.add(["list-group-item"]);
+    ulEle.appendChild(liEle);
+
+    const flexDiv = document.createElement("div");
+    flexDiv.classList.add(...["d-flex", "justify-content-between"]);
+    liEle.appendChild(flexDiv);
+
+    const startTimeInput = document.createElement("input");
+    startTimeInput.id = "task-edit-modal-start-time";
+    // startTimeSpan.classList.add(["form-control"]);
+    startTimeInput.value = MyDate.getFormatedDate(start, true);
+    flexDiv.appendChild(startTimeInput);
+
+    const endTimeInput = document.createElement("input");
+    endTimeInput.id = "task-edit-modal-end-time";
+    // endTimeSpan.classList.add(["form-control"]);
+    endTimeInput.value = MyDate.getFormatedDate(end, true);
+    flexDiv.appendChild(endTimeInput);
+
+    const deleteBtn = createIconBtn("./src/icons/trash.svg");
+    deleteBtn.addEventListener("click", () => {
+      liEle.remove();
+    });
+    flexDiv.appendChild(deleteBtn);
+  });
+
+  return ulEle;
+};
 
 const createCardDescription = (id, description) => {
   const ele = document.createElement("h6");
@@ -119,6 +158,27 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
   collapseBtn.setAttribute("data-target", `#demo${id}`);
   collapseBtn.innerText = "顯示詳細工作時間";
   cardBody.appendChild(collapseBtn);
+
+  const edtionBtn = document.createElement("button");
+  edtionBtn.classList.add(...["btn", "btn-info", "b-margin", "l-margin"]);
+  edtionBtn.setAttribute("data-toggle", "modal");
+  edtionBtn.setAttribute("data-target", "#editionModal");
+  edtionBtn.innerText = "編輯";
+  edtionBtn.addEventListener("click", () => {
+    const data = getTaskList();
+    const task = data.filter(({ id: taskId }) => taskId === id).pop();
+    document.getElementById("task-edition-modal-task-name").value =
+      task.taskName;
+    document.getElementById("task-edition-modal-task-description").value =
+      task.taskDescription;
+
+    document.getElementById("task-edition-modal-task-id").innerText = id;
+
+    const modalBody = document.getElementById("edition-modal-body");
+    modalBody.lastChild.remove();
+    modalBody.appendChild(createEditableTimeListEle(task.timeList));
+  });
+  cardBody.appendChild(edtionBtn);
 
   const appendTimeBtn = document.createElement("button");
   appendTimeBtn.classList.add(

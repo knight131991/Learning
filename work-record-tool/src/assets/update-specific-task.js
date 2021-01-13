@@ -1,10 +1,7 @@
+const getTaskList = require("./get-task-list");
+
 const updateSpecificTask = (id, { taskName, taskDescription, timeList }) => {
-  const data = JSON.parse(
-    fs.readFileSync(
-      path.resolve(__dirname, "../../data/task-list.json"),
-      "utf-8"
-    ) || "[]"
-  );
+  const data = getTaskList();
 
   const result = data.map((item) => {
     if (item.id === id) {

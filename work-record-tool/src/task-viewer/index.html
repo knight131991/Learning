@@ -1,7 +1,36 @@
 <div id='task-viewer-container'>
     <div class="d-flex">
-        <input id ="task-viewer-seach-input" class="form-control me-2" type="search" placeholder="關鍵字(正規表達式)" aria-label="Search">
-        <button id ="task-viewer-seach-btn" class="btn btn-outline-success pre-wrap l-margin">搜尋</button>
+        <input id="task-viewer-seach-input" class="form-control me-2" type="search" placeholder="關鍵字(正規表達式)"
+            aria-label="Search">
+        <button id="task-viewer-seach-btn" class="btn btn-outline-success pre-wrap l-margin">搜尋</button>
     </div>
+
     <div id='task-viewer-task-list-container'></div>
+
+    <div class="modal fade" id="editionModal" tabindex="-1" aria-labelledby="editionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">編輯工作任務</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="edition-modal-body">
+                    <label for="task-edition-modal-task-name" class=" form-label">任務名稱</label>
+                    <input class="form-control" id="task-edition-modal-task-name">
+                    <label for="task-edition-modal-task-description" class=" form-label">描述</label>
+                    <input class="form-control" id="task-edition-modal-task-description">
+                    <span class="is-hidden" id="task-edition-modal-task-id"></span>
+                    <label>工作時間列表</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id='task-edition-modal-confirm-btn'
+                        data-dismiss="modal">儲存變更</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
