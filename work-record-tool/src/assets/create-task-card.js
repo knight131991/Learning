@@ -72,7 +72,9 @@ const createEditableTimeListEle = (timeList) => {
     endTimeInput.value = MyDate.getFormatedDate(end, true);
     flexDiv.appendChild(endTimeInput);
 
-    const deleteBtn = createIconBtn("./src/icons/trash.svg");
+    const deleteBtn = createIconBtn(
+      path.resolve(__dirname, "../icons/trash.svg")
+    );
     deleteBtn.addEventListener("click", () => {
       liEle.remove();
     });

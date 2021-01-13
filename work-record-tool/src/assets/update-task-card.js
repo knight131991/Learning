@@ -11,12 +11,10 @@ const updateTaskCard = (taskId, { title, description, timeList }) => {
     taskCard.querySelector(".card-header").textContent = title;
   }
 
+  const ele = taskCard.querySelector(`#card-description-${taskId}`);
   if (description) {
-    const ele = taskCard.querySelector(`#card-description-${taskId}`);
     if (ele) {
-      taskCard.querySelector(
-        `#card-description-${taskId}`
-      ).textContent = description;
+      ele.textContent = description;
     } else {
       const descriptEle = createCardDescription(taskId, description);
       const cardBody = taskCard.querySelector(".card-body");
@@ -25,6 +23,8 @@ const updateTaskCard = (taskId, { title, description, timeList }) => {
         cardBody.querySelector(`#duration-${taskId}`)
       );
     }
+  } else {
+    ele && ele.remove();
   }
 
   if (timeList) {
