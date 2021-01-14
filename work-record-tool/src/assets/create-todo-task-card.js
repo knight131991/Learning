@@ -1,3 +1,6 @@
+const { todoListFilePath } = require("./constant");
+const createStopwatchBrowser = require("./create-stopwatch-browser");
+const removeDataById = require("./removeDataById");
 const MyDate = require("./time-handler");
 
 const createTodoTaskCard = ({ name, description, hintTime, id }) => {
@@ -28,6 +31,25 @@ const createTodoTaskCard = ({ name, description, hintTime, id }) => {
     true
   )}`;
   cardBody.appendChild(hintTimeEle);
+
+  const startBtn = document.createElement("button");
+  startBtn.classList.add(...["btn", "btn-info", "b-margin"]);
+  startBtn.innerText = "開始任務";
+  startBtn.addEventListener("click", () => {
+    const win = createStopwatchBrowser();
+
+    win.webContents.on("did-finish-load", () => {
+      win.webContents.send("task-info", {
+        taskName: name,
+        taskDescription: description,
+      });
+      win.show();
+    });
+
+    cardContainer.remove();
+    removeDataById(todoListFilePath, id);
+  });
+  cardBody.appendChild(startBtn);
 
   return cardContainer;
 };

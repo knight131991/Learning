@@ -6,6 +6,7 @@ const {
 } = require("../assets/constant");
 const IndexHandler = require("../assets/index-handler");
 const createTodoTaskCard = require("../assets/create-todo-task-card");
+const MyDate = require("../assets/time-handler");
 
 let taskName = "";
 let taskDescription = "";
@@ -75,3 +76,9 @@ document
     descriptionEle.value = "";
     hintTimeEle.value = "";
   });
+
+document.getElementById(
+  "task-creator-todo-task-start-time"
+).value = MyDate.getFormatedDate(
+  new Date().setDate(new Date().getDate() + 1)
+).replace(/\//g, "-");

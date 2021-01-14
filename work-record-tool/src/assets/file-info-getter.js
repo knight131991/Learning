@@ -1,3 +1,4 @@
+const fs = require("fs");
 class FileInfoGetter {
   constructor() {}
 

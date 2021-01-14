@@ -20,14 +20,24 @@ class MyDate {
   static getFormatedDate(inputTime, showTime) {
     const time = new Date(inputTime);
     const year = time.getFullYear();
-    const month = time.getMonth() + 1;
-    const day = time.getDate();
+    const month = `0${time.getMonth() + 1}`.slice(-2);
+    const day = `0${time.getDate()}`.slice(-2);
     const hour = `0${time.getHours()}`.slice(-2);
     const minute = `0${time.getMinutes()}`.slice(-2);
     const second = `0${time.getSeconds()}`.slice(-2);
     return `${year}/${month}/${day}${
       showTime ? `  ${hour}:${minute}:${second}` : ""
-    } `;
+    }`;
+  }
+
+  static isToday(inputDate) {
+    const date = new Date(inputDate);
+    const today = new Date();
+    return (
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    );
   }
 
   static getTimeListDuration(timeList) {
