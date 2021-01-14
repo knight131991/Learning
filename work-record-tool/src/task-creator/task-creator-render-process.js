@@ -32,3 +32,22 @@ document.getElementById("create-new-task-btn").addEventListener("click", () => {
     win.show();
   });
 });
+
+document
+  .getElementById("create-new-todo-task-btn")
+  .addEventListener("click", () => {
+    const name = document.getElementById("task-creator-todo-task-name").value;
+    const description = document.getElementById(
+      "task-creator-todo-task-description"
+    ).value;
+    const hintTime = document.getElementById(
+      "task-creator-todo-task-start-time"
+    ).value;
+
+    if (!name) {
+      alert("請輸入代辦事項名稱");
+      return;
+    }
+
+    console.log("todo task", name, description, hintTime);
+  });
