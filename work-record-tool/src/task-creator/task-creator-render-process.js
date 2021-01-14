@@ -1,4 +1,11 @@
+const appendDataToFile = require("../assets/append-data-to-file");
 const createStopwatchBrowser = require("../assets/create-stopwatch-browser");
+const {
+  todoListIndexFilePath,
+  todoListFilePath,
+} = require("../assets/constant");
+const IndexHandler = require("../assets/index-handler");
+const createTodoTaskCard = require("../assets/create-todo-task-card");
 
 let taskName = "";
 let taskDescription = "";
@@ -36,18 +43,35 @@ document.getElementById("create-new-task-btn").addEventListener("click", () => {
 document
   .getElementById("create-new-todo-task-btn")
   .addEventListener("click", () => {
-    const name = document.getElementById("task-creator-todo-task-name").value;
-    const description = document.getElementById(
+    const nameEle = document.getElementById("task-creator-todo-task-name");
+    const descriptionEle = document.getElementById(
       "task-creator-todo-task-description"
-    ).value;
-    const hintTime = document.getElementById(
+    );
+    const hintTimeEle = document.getElementById(
       "task-creator-todo-task-start-time"
-    ).value;
+    );
 
-    if (!name) {
+    if (!nameEle.value) {
       alert("請輸入代辦事項名稱");
       return;
     }
 
-    console.log("todo task", name, description, hintTime);
+    const indexHandler = new IndexHandler(todoListIndexFilePath);
+
+    const todoTaskInfo = {
+      name: nameEle.value,
+      description: descriptionEle.value,
+      hintTime: hintTimeEle.value,
+      id: indexHandler.increaseIndex(),
+    };
+
+    appendDataToFile(todoListFilePath, todoTaskInfo, true);
+
+    const todoTaskCard = createTodoTaskCard(todoTaskInfo);
+    document
+      .getElementById("todo-task-viewer-list-container")
+      .appendChild(todoTaskCard);
+    nameEle.value = "";
+    descriptionEle.value = "";
+    hintTimeEle.value = "";
   });

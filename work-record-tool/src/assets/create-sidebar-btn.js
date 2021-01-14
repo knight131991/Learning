@@ -6,6 +6,11 @@ const sidebarBtnList = [
     defaultShow: true,
   },
   { name: "任務紀錄", id: "task-viewer-btn", sectionId: "task-viewer" },
+  {
+    name: "代辦事項",
+    id: "todo-task-viewer-btn",
+    sectionId: "todo-task-viewer",
+  },
 ];
 const sidebarUl = document.getElementById("sidebar-ul");
 localStorage.setItem("current-section", "");

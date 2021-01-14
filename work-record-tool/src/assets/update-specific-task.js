@@ -1,7 +1,7 @@
-const getTaskList = require("./get-task-list");
+const FileInfoGetter = require("./file-info-getter");
 
 const updateSpecificTask = (id, { taskName, taskDescription, timeList }) => {
-  const data = getTaskList();
+  const data = new FileInfoGetter().getTaskList();
 
   const result = data.map((item) => {
     if (item.id === id) {

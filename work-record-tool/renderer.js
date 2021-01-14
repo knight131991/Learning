@@ -7,10 +7,14 @@
 
 const path = require("path");
 const appendTaskToTaskList = require("./src/assets/append-task-to-task-list");
-const { indexFilePath } = require("./src/assets/constant");
+const {
+  indexFilePath,
+  todoListIndexFilePath,
+  todoListFilePath,
+} = require("./src/assets/constant");
 const createFolder = require("./src/assets/create-folder");
 const { taskCardCreator } = require("./src/assets/create-task-card");
-const getTaskList = require("./src/assets/get-task-list");
+const FileInfoGetter = require("./src/assets/file-info-getter");
 const IndexHandler = require("./src/assets/index-handler");
 const updateSpecificTask = require("./src/assets/update-specific-task");
 const updateTaskCard = require("./src/assets/update-task-card");
@@ -42,7 +46,8 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   } else {
     const taskId = arg.id;
 
-    const allTaskInfo = getTaskList();
+    const infoGetter = new FileInfoGetter();
+    const allTaskInfo = infoGetter.getTaskList();
     const taskInfo = allTaskInfo.filter(({ id }) => id === taskId).pop();
     const timeList = [...taskInfo.timeList, ...arg.timeList];
 
@@ -58,3 +63,5 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
 
 createFolder(path.resolve(__dirname, "data/task-list.json"));
 createFolder(indexFilePath);
+createFolder(todoListIndexFilePath);
+createFolder(todoListFilePath);

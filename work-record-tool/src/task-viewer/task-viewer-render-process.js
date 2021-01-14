@@ -1,9 +1,10 @@
 const fs = require("fs");
 const MySearch = require("../assets/searcher");
 const { taskCardCreator } = require("../assets/create-task-card");
-const getTaskList = require("../assets/get-task-list");
+const FileInfoGetter = require("../assets/file-info-getter");
 const updateSpecificTask = require("../assets/update-specific-task");
 const updateTaskCard = require("../assets/update-task-card");
+const ElementCreator = require("../assets/ElementCreator");
 
 const searcher = new MySearch();
 searcher.addIndex("taskName");
@@ -46,13 +47,9 @@ const appendListToListContainer = (list) => {
   });
 
   if (list.length === 0) {
-    const divEle = document.createElement("div");
-    divEle.classList.add(...["d-flex", "justify-content-center"]);
-    divEle.style.marginTop = "24px";
-    divEle.innerText = "沒有符合的內容";
     document
       .getElementById("task-viewer-task-list-container")
-      .appendChild(divEle);
+      .appendChild(new ElementCreator().createEmptyHint());
   }
 };
 
@@ -61,7 +58,7 @@ const clearTaskList = () => {
 };
 
 const search = (keywork) => {
-  const dataObj = getTaskList();
+  const dataObj = new FileInfoGetter().getTaskList();
   searcher.addDocuments(dataObj);
   const searchResult = searcher.search(keywork);
   // console.log("search result", searchResult, dataObj);
@@ -74,7 +71,7 @@ const handleSearchEvent = () => {
   if (keywork) {
     search(keywork);
   } else {
-    const dataObj = getTaskList();
+    const dataObj = new FileInfoGetter().getTaskList();
     clearTaskList();
     appendListToListContainer(dataObj);
   }
@@ -100,5 +97,5 @@ document
     updateSpecificTask(Number(id), restInfo);
   });
 
-const dataObj = getTaskList();
+const dataObj = new FileInfoGetter().getTaskList();
 appendListToListContainer(dataObj);

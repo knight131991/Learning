@@ -4,7 +4,7 @@ require("bootstrap/js/dist/modal");
 const MyDate = require("../assets/time-handler");
 const createIconBtn = require("./create-icon-button");
 const createStopwatchBrowser = require("./create-stopwatch-browser");
-const getTaskList = require("./get-task-list");
+const FileInfoGetter = require("./file-info-getter");
 
 // module.exports = taskCardCreator = ({ title, timeList, description, id }) => `
 //   <div class="card card-margin">
@@ -167,7 +167,7 @@ const taskCardCreator = ({ title, timeList, description, id }) => {
   edtionBtn.setAttribute("data-target", "#editionModal");
   edtionBtn.innerText = "編輯";
   edtionBtn.addEventListener("click", () => {
-    const data = getTaskList();
+    const data = new FileInfoGetter().getTaskList();
     const task = data.filter(({ id: taskId }) => taskId === id).pop();
     document.getElementById("task-edition-modal-task-name").value =
       task.taskName;

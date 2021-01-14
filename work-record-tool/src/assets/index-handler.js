@@ -32,7 +32,7 @@ class IndexHandler {
     this.path = pathName;
   }
   getIndex() {
-    const data = fs.readFileSync(this.path, "utf-8") || '{"index":0}';
+    const data = fs.readFileSync(this.path, "utf-8") || '{"index":-1}';
     return JSON.parse(data).index;
   }
 
