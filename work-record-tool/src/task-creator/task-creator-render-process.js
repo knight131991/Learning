@@ -74,7 +74,9 @@ document
       .appendChild(todoTaskCard);
     nameEle.value = "";
     descriptionEle.value = "";
-    hintTimeEle.value = "";
+    hintTimeEle.value = MyDate.getFormatedDate(
+      new Date().setDate(new Date().getDate() + 1)
+    ).replace(/\//g, "-");
   });
 
 document.getElementById(

@@ -1,6 +1,6 @@
 {
   "name": "work-record-tool",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A tool for recording your work log",
   "main": "main.js",
   "scripts": {

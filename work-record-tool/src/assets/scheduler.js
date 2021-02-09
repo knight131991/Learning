@@ -2,25 +2,31 @@ var schedule = require("node-schedule");
 const FileInfoGetter = require("./file-info-getter");
 const MyDate = require("./time-handler");
 
-const setSchedule = (inputDate, execCallback, adjustHours = 9) => {
+const setSchedule = (inputDate, execCallback, adjustHours = true) => {
   const date = new Date(inputDate);
-  adjustHours && date.setHours(adjustHours, 0, 0);
+  if (adjustHours) {
+    date.setHours(9, 0, 0);
+    schedule.scheduleJob(date, execCallback);
+    date.setHours(13, 5, 0);
+    schedule.scheduleJob(date, execCallback);
+    return;
+  }
   schedule.scheduleJob(date, execCallback);
 };
 
 const setTodayTodoToSchedule = () => {
-  const data = new FileInfoGetter().getTodoList();
-  const todayList = data
-    .map((item) => (MyDate.isToday(item.hintTime) ? item : ""))
-    .filter((item) => item);
-  const hintBody = todayList.reduce((pre, { name }, id) => {
-    return pre.concat(`${id + 1}. ${name} \n`);
-  }, "");
-
-  const callback = () =>
+  const callback = () => {
+    const data = new FileInfoGetter().getTodoList();
+    const todayList = data
+      .map((item) => (MyDate.isToday(item.hintTime) ? item : ""))
+      .filter((item) => item);
+    const hintBody = todayList.reduce((pre, { name }, id) => {
+      return pre.concat(`${id + 1}. ${name} \n`);
+    }, "");
     new Notification("今日代辦事項", {
       body: hintBody,
     });
+  };
 
   setSchedule(new Date(), callback);
 };
@@ -38,6 +44,4 @@ schedule.scheduleJob("20 17 * * *", function () {
   });
 });
 
-setTodayTodoToSchedule();
-
-module.exports = { setSchedule };
+module.exports = { setSchedule, setTodayTodoToSchedule };
