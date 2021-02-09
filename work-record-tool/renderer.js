@@ -36,6 +36,12 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
     const taskViewerContainer = document.getElementById(
       "task-viewer-task-list-container"
     );
+    if (
+      taskViewerContainer.childElementCount === 1 &&
+      taskViewerContainer.firstChild.id === "task-viewer-empty-element"
+    ) {
+      taskViewerContainer.firstChild.remove();
+    }
     taskViewerContainer.insertBefore(
       taskItemCard,
       taskViewerContainer.firstChild

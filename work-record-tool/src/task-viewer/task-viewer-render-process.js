@@ -5,10 +5,9 @@ const FileInfoGetter = require("../assets/file-info-getter");
 const updateSpecificTask = require("../assets/update-specific-task");
 const updateTaskCard = require("../assets/update-task-card");
 const ElementCreator = require("../assets/ElementCreator");
-const createConfirmModal = require("../assets/create-confirm-modal");
 
 document.getElementById("task-viewer-container").appendChild(
-  createConfirmModal({
+  new ElementCreator().createConfirmModal({
     modalId: "remove-task-list-confirm-modal",
     title: "刪除任務",
     content: "確認是否要刪除此任務",
@@ -43,6 +42,7 @@ const getTaskInfoFromModal = () => {
 };
 
 const appendListToListContainer = (list) => {
+  const container = document.getElementById("task-viewer-task-list-container");
   list.forEach(({ taskName, timeList, taskDescription, id }) => {
     const taskItemCard = taskCardCreator({
       title: taskName,
@@ -50,15 +50,13 @@ const appendListToListContainer = (list) => {
       timeList,
       id,
     });
-    document
-      .getElementById("task-viewer-task-list-container")
-      .appendChild(taskItemCard);
+    container.appendChild(taskItemCard);
   });
 
   if (list.length === 0) {
-    document
-      .getElementById("task-viewer-task-list-container")
-      .appendChild(new ElementCreator().createEmptyHint());
+    container.appendChild(
+      new ElementCreator().createEmptyHint("task-viewer-empty-element")
+    );
   }
 };
 
