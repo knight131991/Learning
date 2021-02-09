@@ -1,16 +1,50 @@
 const { todoListFilePath } = require("./constant");
+const createIconBtn = require("./create-icon-button");
 const createStopwatchBrowser = require("./create-stopwatch-browser");
 const removeDataById = require("./removeDataById");
 const MyDate = require("./time-handler");
+
+const createCardHeader = (title, taskId, cardContainer) => {
+  const cardHeader = document.createElement("div");
+  cardHeader.classList.add(
+    ...["card-header", "d-flex", "justify-content-between"]
+  );
+
+  const cardHeaderContent = document.createElement("div");
+  cardHeaderContent.innerText = `${title}`;
+
+  const deleteBtn = createIconBtn(
+    path.resolve(__dirname, "../icons/trash.svg")
+  );
+  deleteBtn.setAttribute("data-toggle", "modal");
+  deleteBtn.setAttribute("data-target", "#remove-todo-task-list-confirm-modal");
+
+  deleteBtn.addEventListener("click", () => {
+    const orgConfirmBtn = document.getElementById(
+      "remove-todo-task-list-confirm-modal-confirm-button"
+    );
+    const clone = orgConfirmBtn.cloneNode(true);
+    orgConfirmBtn.parentNode.replaceChild(clone, orgConfirmBtn);
+    document
+      .getElementById("remove-todo-task-list-confirm-modal-confirm-button")
+      .addEventListener("click", () => {
+        removeDataById(todoListFilePath, taskId);
+        cardContainer.remove();
+      });
+  });
+
+  cardHeader.appendChild(cardHeaderContent);
+  cardHeader.appendChild(deleteBtn);
+
+  return cardHeader;
+};
 
 const createTodoTaskCard = ({ name, description, hintTime, id }) => {
   const cardContainer = document.createElement("div");
   cardContainer.id = `todo-task-card-${id}`;
   cardContainer.classList.add(...["card", "t-b-margin"]);
 
-  const cardHeader = document.createElement("div");
-  cardHeader.classList.add(["card-header"]);
-  cardHeader.innerText = `${name}`;
+  const cardHeader = createCardHeader(name, id, cardContainer);
   cardContainer.appendChild(cardHeader);
 
   const cardBody = document.createElement("div");

@@ -2,6 +2,14 @@ const createTodoTaskCard = require("../assets/create-todo-task-card");
 const FileInfoGetter = require("../assets/file-info-getter");
 const ElementCreator = require("../assets/ElementCreator");
 
+document.getElementById("todo-task-viewer-container").appendChild(
+  new ElementCreator().createConfirmModal({
+    modalId: "remove-todo-task-list-confirm-modal",
+    title: "刪除代辦事項",
+    content: "確認是否要刪除此代辦事項",
+  })
+);
+
 const appendTodoListToContainer = (list) => {
   list.forEach((todoInfo) => {
     const taskCard = createTodoTaskCard(todoInfo);
