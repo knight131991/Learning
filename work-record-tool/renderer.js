@@ -11,6 +11,7 @@ const {
   indexFilePath,
   todoListIndexFilePath,
   todoListFilePath,
+  taskListPath,
 } = require("./src/assets/constant");
 const createFolder = require("./src/assets/create-folder");
 const { taskCardCreator } = require("./src/assets/create-task-card");
@@ -40,7 +41,7 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
       taskViewerContainer.firstChild
     );
 
-    appendTaskToTaskList(path.resolve(__dirname, "data/task-list.json"), {
+    appendTaskToTaskList(taskListPath, {
       ...arg,
       id: taskId,
     });
@@ -62,7 +63,7 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   }
 });
 
-createFolder(path.resolve(__dirname, "data/task-list.json"));
+createFolder(taskListPath);
 createFolder(indexFilePath);
 createFolder(todoListIndexFilePath);
 createFolder(todoListFilePath);

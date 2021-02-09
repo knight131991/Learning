@@ -5,6 +5,15 @@ const FileInfoGetter = require("../assets/file-info-getter");
 const updateSpecificTask = require("../assets/update-specific-task");
 const updateTaskCard = require("../assets/update-task-card");
 const ElementCreator = require("../assets/ElementCreator");
+const createConfirmModal = require("../assets/create-confirm-modal");
+
+document.getElementById("task-viewer-container").appendChild(
+  createConfirmModal({
+    modalId: "remove-task-list-confirm-modal",
+    title: "刪除任務",
+    content: "確認是否要刪除此任務",
+  })
+);
 
 const searcher = new MySearch();
 searcher.addIndex("taskName");

@@ -2,9 +2,11 @@ require("jquery");
 require("bootstrap/js/dist/collapse");
 require("bootstrap/js/dist/modal");
 const MyDate = require("../assets/time-handler");
+const { taskListPath } = require("./constant");
 const createIconBtn = require("./create-icon-button");
 const createStopwatchBrowser = require("./create-stopwatch-browser");
 const FileInfoGetter = require("./file-info-getter");
+const removeDataById = require("./removeDataById");
 
 // module.exports = taskCardCreator = ({ title, timeList, description, id }) => `
 //   <div class="card card-margin">
@@ -123,14 +125,47 @@ const createCardTimeListEle = (timeList) => {
   return ulEle;
 };
 
+const createCardHeader = (title, taskId, cardContainer) => {
+  const cardHeader = document.createElement("div");
+  cardHeader.classList.add(
+    ...["card-header", "d-flex", "justify-content-between"]
+  );
+
+  const cardHeaderContent = document.createElement("div");
+  cardHeaderContent.innerText = `${title}`;
+
+  const deleteBtn = createIconBtn(
+    path.resolve(__dirname, "../icons/trash.svg")
+  );
+  deleteBtn.setAttribute("data-toggle", "modal");
+  deleteBtn.setAttribute("data-target", "#remove-task-list-confirm-modal");
+
+  deleteBtn.addEventListener("click", () => {
+    const orgConfirmBtn = document.getElementById(
+      "remove-task-list-confirm-modal-confirm-button"
+    );
+    const clone = orgConfirmBtn.cloneNode(true);
+    orgConfirmBtn.parentNode.replaceChild(clone, orgConfirmBtn);
+    document
+      .getElementById("remove-task-list-confirm-modal-confirm-button")
+      .addEventListener("click", () => {
+        removeDataById(taskListPath, taskId);
+        cardContainer.remove();
+      });
+  });
+
+  cardHeader.appendChild(cardHeaderContent);
+  cardHeader.appendChild(deleteBtn);
+
+  return cardHeader;
+};
+
 const taskCardCreator = ({ title, timeList, description, id }) => {
   const cardContainer = document.createElement("div");
   cardContainer.id = `task-card-${id}`;
   cardContainer.classList.add(...["card", "t-b-margin"]);
 
-  const cardHeader = document.createElement("div");
-  cardHeader.classList.add(["card-header"]);
-  cardHeader.innerText = `${title}`;
+  const cardHeader = createCardHeader(title, id, cardContainer);
   cardContainer.appendChild(cardHeader);
 
   const cardBody = document.createElement("div");

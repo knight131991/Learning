@@ -1,3 +1,4 @@
+const { taskListPath } = require("./constant");
 const FileInfoGetter = require("./file-info-getter");
 
 const updateSpecificTask = (id, { taskName, taskDescription, timeList }) => {
@@ -10,10 +11,7 @@ const updateSpecificTask = (id, { taskName, taskDescription, timeList }) => {
     return item;
   });
 
-  fs.writeFileSync(
-    path.resolve(__dirname, "../../data/task-list.json"),
-    JSON.stringify(result)
-  );
+  fs.writeFileSync(taskListPath, JSON.stringify(result));
 };
 
 module.exports = updateSpecificTask;
