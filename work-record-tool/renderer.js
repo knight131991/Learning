@@ -16,7 +16,7 @@ const {
   diaryListIndexPath,
 } = require("./src/assets/constant");
 const createFolder = require("./src/assets/create-folder");
-const { taskCardCreator } = require("./src/assets/create-task-card");
+const ElementCreator = require("./src/assets/ElementCreator");
 const FileInfoGetter = require("./src/assets/file-info-getter");
 const IndexHandler = require("./src/assets/index-handler");
 const { setTodayTodoToSchedule } = require("./src/assets/scheduler");
@@ -29,7 +29,7 @@ require("electron").ipcRenderer.on("stopwatch-time-list", (event, arg) => {
   if (!arg.id) {
     const indexHandler = new IndexHandler(indexFilePath);
     const taskId = indexHandler.increaseIndex();
-    const taskItemCard = taskCardCreator({
+    const taskItemCard = new ElementCreator().createTaskCard({
       title: arg.taskName,
       timeList: arg.timeList,
       description: arg.taskDescription,

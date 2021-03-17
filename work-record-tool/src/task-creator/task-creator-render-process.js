@@ -5,8 +5,8 @@ const {
   todoListFilePath,
 } = require("../assets/constant");
 const IndexHandler = require("../assets/index-handler");
-const createTodoTaskCard = require("../assets/create-todo-task-card");
 const MyDate = require("../assets/time-handler");
+const ElementCreator = require("../assets/ElementCreator");
 
 let taskName = "";
 let taskDescription = "";
@@ -68,7 +68,7 @@ document
 
     appendDataToFile(todoListFilePath, todoTaskInfo, true);
 
-    const todoTaskCard = createTodoTaskCard(todoTaskInfo);
+    const todoTaskCard = new ElementCreator().createTodoTaskCard(todoTaskInfo);
     document
       .getElementById("todo-task-viewer-list-container")
       .appendChild(todoTaskCard);

@@ -1,4 +1,3 @@
-const createTodoTaskCard = require("../assets/create-todo-task-card");
 const FileInfoGetter = require("../assets/file-info-getter");
 const ElementCreator = require("../assets/ElementCreator");
 
@@ -12,7 +11,7 @@ document.getElementById("todo-task-viewer-container").appendChild(
 
 const appendTodoListToContainer = (list) => {
   list.forEach((todoInfo) => {
-    const taskCard = createTodoTaskCard(todoInfo);
+    const taskCard = new ElementCreator().createTodoTaskCard(todoInfo);
     document
       .getElementById("todo-task-viewer-list-container")
       .appendChild(taskCard);

@@ -1,6 +1,5 @@
 const fs = require("fs");
 const MySearch = require("../assets/searcher");
-const { taskCardCreator } = require("../assets/create-task-card");
 const FileInfoGetter = require("../assets/file-info-getter");
 const updateSpecificTask = require("../assets/update-specific-task");
 const updateTaskCard = require("../assets/update-task-card");
@@ -44,7 +43,7 @@ const getTaskInfoFromModal = () => {
 const appendListToListContainer = (list) => {
   const container = document.getElementById("task-viewer-task-list-container");
   list.forEach(({ taskName, timeList, taskDescription, id }) => {
-    const taskItemCard = taskCardCreator({
+    const taskItemCard = new ElementCreator().createTaskCard({
       title: taskName,
       description: taskDescription,
       timeList,

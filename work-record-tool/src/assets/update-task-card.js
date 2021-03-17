@@ -1,14 +1,12 @@
-const {
-  createCardDescription,
-  createCardTimeListEle,
-} = require("./create-task-card");
+const ElementCreator = require("./ElementCreator");
 const MyDate = require("./time-handler");
 
 const updateTaskCard = (taskId, { title, description, timeList }) => {
+  const eleCreator = new ElementCreator();
   const taskCard = document.getElementById(`task-card-${taskId}`);
 
   if (title) {
-    taskCard.querySelector(".card-header").textContent = title;
+    taskCard.querySelector("#card-header-title").textContent = title;
   }
 
   const ele = taskCard.querySelector(`#card-description-${taskId}`);
@@ -16,7 +14,10 @@ const updateTaskCard = (taskId, { title, description, timeList }) => {
     if (ele) {
       ele.textContent = description;
     } else {
-      const descriptEle = createCardDescription(taskId, description);
+      const descriptEle = eleCreator.createTaskCardDescription(
+        taskId,
+        description
+      );
       const cardBody = taskCard.querySelector(".card-body");
       cardBody.insertBefore(
         descriptEle,
@@ -34,7 +35,7 @@ const updateTaskCard = (taskId, { title, description, timeList }) => {
       true
     )}`;
 
-    const timeListEle = createCardTimeListEle(timeList);
+    const timeListEle = eleCreator.createTaskCardTimeListEle(timeList);
     const collapsedArea = taskCard.querySelector(`#demo${taskId}`);
     collapsedArea.removeChild(collapsedArea.firstChild);
     collapsedArea.appendChild(timeListEle);
