@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const appendDataToFile = (pathName, data, reverse) => {
   const fileData = fs.readFileSync(pathName, "utf-8") || "[]";
   const fileDataObj = JSON.parse(fileData);

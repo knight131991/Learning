@@ -1,3 +1,5 @@
+const { BrowserWindow } = require("electron").remote;
+
 class ElementCreator {
   constructor() {}
 
@@ -8,6 +10,27 @@ class ElementCreator {
     divEle.style.marginTop = "24px";
     divEle.innerText = "沒有符合的內容";
     return divEle;
+  }
+
+  createDiaryWindow() {
+    let win = new BrowserWindow({
+      show: false,
+      width: 500,
+      height: 300,
+      webPreferences: {
+        nodeIntegration: true,
+        enableRemoteModule: true,
+      },
+      frame: false,
+    });
+
+    win.on("close", () => {
+      win = null;
+    });
+
+    win.loadURL(path.join("file://", __dirname, "../diary/index.html"));
+
+    return win;
   }
 
   createConfirmModal = ({ modalId, title, content, onOK = () => {} }) => {

@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { taskListPath } = require("./constant");
+const { taskListPath, diaryListPath } = require("./constant");
 class FileInfoGetter {
   constructor() {}
 
@@ -10,6 +10,11 @@ class FileInfoGetter {
 
   getTodoList = () => {
     const data = fs.readFileSync(todoListFilePath, "utf-8") || "[]";
+    return JSON.parse(data);
+  };
+
+  getDiaryList = () => {
+    const data = fs.readFileSync(diaryListPath, "utf-8" || "[]");
     return JSON.parse(data);
   };
 }

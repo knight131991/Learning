@@ -12,6 +12,8 @@ const {
   todoListIndexFilePath,
   todoListFilePath,
   taskListPath,
+  diaryListPath,
+  diaryListIndexPath,
 } = require("./src/assets/constant");
 const createFolder = require("./src/assets/create-folder");
 const { taskCardCreator } = require("./src/assets/create-task-card");
@@ -73,4 +75,6 @@ createFolder(taskListPath);
 createFolder(indexFilePath);
 createFolder(todoListIndexFilePath);
 createFolder(todoListFilePath);
+createFolder(diaryListPath);
+createFolder(diaryListIndexPath);
 setTodayTodoToSchedule();
